@@ -58,14 +58,14 @@
                             </div>
                         </div>
                         <div class="form-bottom">
-                            <g:form name="loginForm" action="userLogin">
+                            <g:form name="loginForm" url="[controller:'user',action:'login']">
                                 <div class="form-group">
                                     <label class="sr-only" for="login">Username</label>
                                     <g:textField id="login" name="login" class="form-control" placeholder="Username" required="true" />
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="password">Password</label>
-                                    <g:textField id="password" name="password" class="form-control" placeholder="Password" required="true" />
+                                    <g:passwordField id="password" name="password" class="form-control" placeholder="Password" required="true" />
                                 </div>
                                 <g:actionSubmit name="signin" class="btn sign" type="submit" value="Sign in" />
                             </g:form>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class="form-bottom">
-                            <g:form name="newAccountForm" action="saveAccount">
+                            <g:form name="newAccountForm" action="newAccount">
                                 <div class="form-group">
                                     <label class="sr-only" for="lastName">Last name</label>
                                     <g:textField id="lastName" name="lastName" class="form-control" placeholder="Last name" required="true" />

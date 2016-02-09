@@ -7,8 +7,10 @@ dependencies:
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-boot/3.1.1/c324ff29d2846a761f19922ca402443f3726088b/grails-web-boot-3.1.1.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails.plugins/cache/3.0.2/519bc1bffb2afa10c93b92e872d49a5238e96558/cache-3.0.2.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails.plugins/scaffolding/3.2.0/fce5425afc23f3121ce28fa15d2318ceadd4c16f/scaffolding-3.2.0.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails.plugins/hibernate4/5.0.1/7b3c808493a4cde1bafeaf41fa70eb1096fb245d/hibernate4-5.0.1.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-ehcache/4.3.11.Final/cea0e6aba102c00cf899bd547c338fcf54468433/hibernate-ehcache-4.3.11.Final.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails.plugins/cassandra/5.0.1/51f25b8036626b231bc270c8d59d534be426719/cassandra-5.0.1.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.datastax.cassandra/cassandra-driver-core/2.0.4/27b7d4850736e5ce0653daafffb1c6a4709c218f/cassandra-driver-core-2.0.4.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/1.8.4.RELEASE/a3b563d1cbacee9ae4a5d5642fa04f5c1e6aa72d/spring-data-commons-1.8.4.RELEASE.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-cassandra/1.0.4.RELEASE/9822d87aaf126db55efe845062c7ddccaf87c2e9/spring-data-cassandra-1.0.4.RELEASE.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails.plugins/asset-pipeline/3.0.15/2076efba1e7c0f38b60dcb6dd096f83857ada431/asset-pipeline-3.0.15.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.h2database/h2/1.4.190/df71536d44e3b07f0c15bb632cac51956c55fc3e/h2-1.4.190.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-plugin-testing/3.1.1/1b3ac1c49653c5e6b162ef91f68cf0d86570a468/grails-plugin-testing-3.1.1.jar
@@ -49,12 +51,12 @@ dependencies:
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.18.1-GA/d9a09f7732226af26bf99f19e2cffe0ae219db5b/javassist-3.18.1-GA.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails.plugins/fields/2.1.2/45019a9e6ad24418ad4c92b948b018ea613293e/fields-2.1.2.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-simple/5.0.1.RELEASE/7441503aef2d9f9283623980ea2f1e0beaa1143a/grails-datastore-simple-5.0.1.RELEASE.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm-support/5.0.1.RELEASE/6a32495623cd37d38e877c9ec2625260e486d9df/grails-datastore-gorm-support-5.0.1.RELEASE.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm-hibernate4/5.0.1.RELEASE/6908da1f4e55537a7816a02be20be99fa14477a3/grails-datastore-gorm-hibernate4-5.0.1.RELEASE.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.jboss.logging/jboss-logging/3.3.0.Final/3616bb87707910296e2c195dc016287080bba5af/jboss-logging-3.3.0.Final.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.jboss.logging/jboss-logging-annotations/1.2.0.Beta1/2f437f37bb265d9f8f1392823dbca12d2bec06d6/jboss-logging-annotations-1.2.0.Beta1.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/4.3.11.Final/536ac0021240d97db99c7d2983067cef1a6f3af5/hibernate-core-4.3.11.Final.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/net.sf.ehcache/ehcache-core/2.4.3/fd258ef6959f27fb678b04f90139ded4588e2d15/ehcache-core-2.4.3.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm-cassandra/5.0.1.RELEASE/77b2812a8196b3d1c00f260453ba2a2e62ef980f/grails-datastore-gorm-cassandra-5.0.1.RELEASE.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/io.netty/netty/3.9.0.Final/bead2f4609b302c43859f156df8911e50df0610b/netty-3.9.0.Final.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.codahale.metrics/metrics-core/3.0.2/c6a7fb32776e984b64ff1a548e3044238ea5a931/metrics-core-3.0.2.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-cql/1.3.2.RELEASE/df1fbd036889df00e46aff990b42aa2582b454f4/spring-cql-1.3.2.RELEASE.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.2.4.RELEASE/15b6f6d61bc68fe2cc6cbd63e2329601afb8b39/spring-expression-4.2.4.RELEASE.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.datastax.cassandra/cassandra-driver-dse/2.1.9/a7b4fca400f8b6828c68234004b8be51a9ca40b1/cassandra-driver-dse-2.1.9.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.mozilla/rhino/1.7R4/e982f2136574b9a423186fbaeaaa98dc3e5a5288/rhino-1.7R4.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.bertramlabs.plugins/asset-pipeline-core/2.6.7/616267fdf3a0347f268e2ae1d9a0a3cc44415cd3/asset-pipeline-core-2.6.7.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/cglib/cglib/2.2.2/a47a971686474124562bdd4a7ccbd8ac8c3e8b11/cglib-2.2.2.jar
@@ -83,7 +85,6 @@ dependencies:
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-client/9.2.12.v20150709/79e439a426514af24e693c78662cb2b4db2be3c6/websocket-client-9.2.12.v20150709.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.1.3/e3c02049f2dbbc764681b40094ecf0dcbc99b157/logback-core-1.1.3.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.2.4.RELEASE/3329cf71b4bc49c9767ca4f0704ed7b773f29fba/spring-aop-4.2.4.RELEASE.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.2.4.RELEASE/15b6f6d61bc68fe2cc6cbd63e2329601afb8b39/spring-expression-4.2.4.RELEASE.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-xml/2.4.5/bbbb0cdd8a566362454372adb1601f0c052e51c6/groovy-xml-2.4.5.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.16/d64fb662c9e42789149f5078a62a22edda786c6a/snakeyaml-1.16.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-ant/2.4.5/da3bf324dd8480f6f94e6f6a6af3fdea7cc03af4/groovy-ant-2.4.5.jar
@@ -106,13 +107,7 @@ dependencies:
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-core/5.0.1.RELEASE/8069a7fe96cc015e4940e4360426877bf8692509/grails-datastore-core-5.0.1.RELEASE.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm/5.0.1.RELEASE/607d4538bd69af68b97861aded9a0428ead9700a/grails-datastore-gorm-5.0.1.RELEASE.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/dom4j/dom4j/1.6.1/5d3ccc056b6f056dbf0dddfdf43894b9065a8f94/dom4j-1.6.1.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm-hibernate-core/5.0.1.RELEASE/8cd3ecb3691b2022c6b19812304aa44072edbd85/grails-datastore-gorm-hibernate-core-5.0.1.RELEASE.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.hibernate.common/hibernate-commons-annotations/4.0.5.Final/2a581b9edb8168e45060d8bad8b7f46712d2c52c/hibernate-commons-annotations-4.0.5.Final.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-validator/5.2.2.Final/990905cd9184450c5f3e929ab2566305e3a67fa1/hibernate-validator-5.2.2.Final.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec/1.0.0.Final/1f9fef7a9fcbb41cc390fc370a291cf30729e094/jboss-transaction-api_1.2_spec-1.0.0.Final.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/antlr/antlr/2.7.7/83cd2cd674a217ade95a4bb83a8a14f351f48bd0/antlr-2.7.7.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.jboss/jandex/1.1.0.Final/e84a2122e76f0b6503be78094ddf2108057ac15f/jandex-1.1.0.Final.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-datastore-gorm-support/5.0.1.RELEASE/6a32495623cd37d38e877c9ec2625260e486d9df/grails-datastore-gorm-support-5.0.1.RELEASE.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.google.javascript/closure-compiler/v20141023/b0bc533425f44e34210d4ecb57721db329f0cb30/closure-compiler-v20141023.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/asm/asm/3.3.1/1d5f20b4ea675e6fab6ab79f1cd60ec268ddc015/asm-3.3.1.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-test/2.4.4/211bd1a4367c9ca30bb053277d857ea94fa3e1e6/groovy-test-2.4.4.jar
@@ -126,7 +121,6 @@ dependencies:
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.gebish/geb-core/0.12.2/df0c0c35ea76e74e0805e7f731fd01d0f67e3440/geb-core-0.12.2.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/cglib/cglib-nodep/2.1_3/58d3be5953547c0019e5704d6ed4ffda3b0c7c66/cglib-nodep-2.1_3.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-api/2.47.1/f586a13419a297427f01266c1013117232808373/selenium-api-2.47.1.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/18.0/cce0823396aa693798f8882e64213b1772032b09/guava-18.0.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-exec/1.3/8dfb9facd0830a27b1b5f29f84593f0aeee7773b/commons-exec-1.3.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna/4.1.0/1c12d070e602efd8021891cdd7fd18bc129372d4/jna-4.1.0.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna-platform/4.1.0/23457ad1cf75c2c16763330de5565a0e67b4bc0a/jna-platform-4.1.0.jar
@@ -168,9 +162,6 @@ dependencies:
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-json/2.4.5/ff21b54d65128ff46488286af056eed606481f97/groovy-json-2.4.5.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.grails/grails-taglib/3.1.1/40a061666fec69ea468139eedf7edd7b994063e1/grails-taglib-3.1.1.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/javax.transaction/jta/1.1/2ca09f0b36ca7d71b762e14ea2ff09d5eac57558/jta-1.1.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.springframework/spring-orm/4.2.4.RELEASE/f8cc11443ea62a189c4574e54116465960c490eb/spring-orm-4.2.4.RELEASE.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.1.0.Final/8613ae82954779d518631e05daa73a6a954817d5/validation-api-1.1.0.Final.jar
-- file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.fasterxml/classmate/1.1.0/dbbd699a1486ad0f2ed6f5af6cfed66acacb9056/classmate-1.1.0.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.google.javascript/closure-compiler-externs/v20141023/18aa5ad56d97ab2f6d2451ad08e38673f961f831/closure-compiler-externs-v20141023.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/args4j/args4j/2.0.26/1ebb18ebb3b379a74207d5af4ea7c8338ebd78b/args4j-2.0.26.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/2.5.0/a10732c76bfacdbd633a7eb0f7968b1059a65dfa/protobuf-java-2.5.0.jar
@@ -191,6 +182,7 @@ dependencies:
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/net.minidev/json-smart/2.1.1/922d12fb1f394e2b6999ae0f7936ab13f4dffb81/json-smart-2.1.1.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.goldmansachs/gs-collections-api/5.1.0/ea605cdf64cab5fc7b48c99f061d4c8db05b6ff1/gs-collections-api-5.1.0.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/net.minidev/asm/1.0.2/63900a15f524db0b8c4fb2d9e24c0cb179842ea5/asm-1.0.2.jar
+- file:/home/farhane/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/18.0/cce0823396aa693798f8882e64213b1772032b09/guava-18.0.jar
 - file:/home/farhane/.gradle/caches/modules-2/files-2.1/org.objenesis/objenesis/2.1/87c0ea803b69252868d09308b4618f766f135a96/objenesis-2.1.jar
 profiles:
 - file:/home/farhane/.m2/repository/org/grails/profiles/web/3.1.1/web-3.1.1.jar
