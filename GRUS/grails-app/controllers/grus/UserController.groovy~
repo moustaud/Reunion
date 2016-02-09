@@ -44,7 +44,7 @@ class UserController {
 				u.setCompany(params.company)
 				u.setGender(params.gender)	
 				u.setRole("user")
-				u.save()
+				u.save();
 				redirect(action:"newAccountForm", params:[message:"Your new account has been created!", messageType:"alert-success"])
 			}catch(e){
 				redirect(action:"allNotification", params:[message:"Error, Failed to create new user account! "+e, messageType:"alert-warning"])
