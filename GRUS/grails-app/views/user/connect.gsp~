@@ -105,6 +105,11 @@
                             </div>
                         </div>
                         <div class="form-bottom">
+<g:form name="loginForm" url="[controller:'user',action:'login']">
+                                <div class="form-group">
+                                    <label class="sr-only" for="login">Username</label>
+                                    <g:textField id="login" name="login" class="form-control" placeholder="Username" required="true" />
+                                </div>
                             <g:form name="newAccountForm" url="[controller:'user',action:'newAccount']">
                                 <div class="form-group">
                                     <label class="sr-only" for="lastName">Last name</label>

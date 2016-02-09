@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GRUS Login &amp; Register Forms</title>
+    <title>GRUS newAccount &amp; Register Forms</title>
 
     <!-- CSS -->
 
@@ -34,9 +34,3 @@
    <h3>cccc</h3>
                               
 </div>
-
-
-
-</body>
-
-</html>
