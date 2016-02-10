@@ -33,22 +33,27 @@ class UserController {
 
 
     def newAccount(){
-		if(params.login && params.email && params.password )
-		{
-			try{
-				
-				User u = new User(login:params.login, email:params.email, password:params.password)
-				u.setFirstName(params.firstName)
-				u.setLastName(params.lastName)
-				u.save()
-				redirect(action:"loginForm", params:[message:"Your new account has been created!", messageType:"alert-success"])
-			}catch(e){
-				redirect(action:"newAccountForm", params:[message:"Error, Failed to create new user account! "+e, messageType:"alert-warning"])
+		if(params.login && params.email && params.password && params.firstName && params.lastName && params.passwordConfirmation){
+			if(params.password == params.passwordConfirmation){
+				try{
+					User u = new User(firstName:params.firstName,lastName:params.lastName,login:params.login, email:params.email, password:params.password,role:"user")
+					u.save(flush: true,failOnError: true)
+					redirect(action:"loginForm", params:[message:"Your new account has been created!", messageType:"alert-success"])
+				}
+				catch(e){
+					redirect(action:"newAccountForm", params:[message:"Error, Failed to create new user account! "+e, messageType:"alert-warning"])
+				}
 			}
+			else{
+				redirect(action:"newAccountForm", params:[message:"Error, You must tape the same password! ", messageType:"alert-warning"])
+			}
+			
 		}
-		else 
-			redirect(action:"newAccountForm", params:[message:"Error, Failed to create new user account!", messageType:"alert-warning"])
+		else{
+			redirect(action:"newAccountForm", params:[message:"Error, Failed to create new user account! Please enter all fields", messageType:"alert-warning"])
+		}
 	}
+		
     
 
     def loginForm(){

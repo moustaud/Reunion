@@ -31,6 +31,6 @@
 
 <!-- Top content -->
 <div class="top-content">
-   <h3>hii</h3>
+   <h3>${params.message}</h3>
                               
 </div>
