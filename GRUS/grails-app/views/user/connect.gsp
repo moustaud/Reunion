@@ -67,7 +67,7 @@
                                     <label class="sr-only" for="password">Password</label>
                                     <g:passwordField id="password" name="password" class="form-control" placeholder="Password" required="true" />
                                 </div>
-                                <g:actionSubmit name="signin" class="btn sign" type="submit" value="Sign in" />
+                                <g:actionSubmit name="signin" class="btn sign" type="submit" value="Sign in" controller="user" action="login"/>
                             </g:form>
                         </div>
                     </div>
@@ -123,14 +123,14 @@
                                     <g:textField id="login" name="login" class="form-control" placeholder="Username" required="true" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="Password">Password</label>
-                                    <g:passwordField id="Password" name="Password" class="form-control" type="password" placeholder="Password" required="true" />
+                                    <label class="sr-only" for="password">Password</label>
+                                    <g:passwordField id="password" name="password" class="form-control" type="password" placeholder="Password" required="true" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="PasswordConfirmation">Password</label>
-                                    <g:passwordField id="PasswordConfirmation" name="PasswordConfirmation" type="password" class="form-control" placeholder="Password confirmation" required="true" />
+                                    <label class="sr-only" for="passwordConfirmation">Password</label>
+                                    <g:passwordField id="passwordConfirmation" name="passwordConfirmation" type="password" class="form-control" placeholder="Password confirmation" required="true" />
                                 </div>
-                                <g:actionSubmit name="signup" class="btn sign" type="submit" value="Sign up" />
+                                <g:actionSubmit name="signup" class="btn sign" type="submit" value="Sign up" controller="user" action="newAccount"/>
                             </g:form>
                         </div>
                     </div>

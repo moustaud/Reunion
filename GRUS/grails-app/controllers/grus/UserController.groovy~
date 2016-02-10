@@ -3,7 +3,8 @@ package grus
 class UserController {
 
     def index() {
-	
+	[userInstanceList:User.list(), 
+	userInstanceTotal:User.count()]
 }
 
     def connect(){
