@@ -26,7 +26,7 @@ class UserController {
 					if( user.password == passHash) {
 						def userInfoToSave = new User(firstName: user.firstName,lastName: user.lastName,login: user.login,role:user.role)
 						session.user=userInfoToSave
-						redirect(controller: "user", action: "newAccountForm", params:[message:"Welcome ${user.login}, you are now connected!", messageType:"alert-success"])					
+						redirect(controller: "user", action: "dashboard")					
 					}
 					else{
 						redirect(controller: "user", action: "newAccountForm", params:[message:"Wrong password!", messageType:"alert-danger"])					
@@ -80,6 +80,30 @@ class UserController {
     }
     def dashboard(){
     
+    }
+    def profile(){
+    	def user = User.findByLogin(session.user.login)
+    	user.salt=null
+    	[user:user]
+    }
+    def changeProfile(){
+    	try{
+    		def user = User.findByLogin(session.user.login)
+	    	user.setFirstName(params.firstName)
+	    	user.setLastName(params.lastName)
+	    	user.setGender(params.gender)
+	    	user.setCompany(params.company)
+	    	user.setJob(params.job)
+	    	
+	    	user.save(failOnError: true,flush: true)
+    		render(view: "profile",model:[user:user])
+    	}
+    	catch(e){
+    		redirect(action:"changeProfileForm", params:[message:"Error, Failed to update new user account! "+e, messageType:"alert-warning"])
+    	}
+    }
+    def chnageProfileForm(){
+        render(view: "changeProfile",prams:params)
     }
     
 

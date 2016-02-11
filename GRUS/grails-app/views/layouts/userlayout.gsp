@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Welcome | Dashboard</title>
+    <title><g:layoutTitle default="Grails"/></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +22,7 @@
     <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'stylesheets',file:'style-responsive.css.css')}" />
     <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'stylesheets',file:'zabuto_calendar.min.css')}" />
     <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'stylesheets',file:'pace.css')}" />
-
+	<g:layoutHead/>
 </head>
 <body>
     <div>
@@ -52,9 +52,9 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
                         
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="${assetPath(src: 'avatar/48.jpg')}" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Robert John</span>&nbsp;<span class="caret"></span></a>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="${assetPath(src: 'avatar/48.jpg')}" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">${session.user.login}</span>&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
+                            <li><a href="${createLink(controller:'user', action:'profile')}"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
                             <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
                             <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
@@ -106,7 +106,7 @@
         </nav>
             <!--END SIDEBAR MENU-->
             <div id="page-wrapper">
-                
+                <g:layoutBody/>
             </div>
             <!--END PAGE WRAPPER-->
         </div>

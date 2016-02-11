@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="dashboard"/>
+		<meta name="layout" content="userlayout"/>
 		<title>I am a test page</title>
 		
 	</head>
