@@ -8,7 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Clustering Tool</title>
 
+    <style type="text/css">
+    <!--
+      div#clusters {
+      	width: 225px;
+      	height: 150px;
+      	overflow: auto;
+      	position: relative; 
+        left: 73px;
+      }
+    -->
 
+    </style>
 
 </head>
 
