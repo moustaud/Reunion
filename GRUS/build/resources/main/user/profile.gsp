@@ -43,7 +43,8 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="text-center mbl"><img src="${assetPath(src: user.picture)}" alt="" class="img-responsive"/></div>
-                                    <div class="text-center mbl"><a href="#" class="btn btn-green"><i class="fa fa-upload"></i>&nbsp;
+                                    <div class="text-center mbl">
+                                    <input type="file" class="btn btn-green" name="picture"/><i class="fa fa-upload"></i>&nbsp;
                                         Upload</a></div>
                                 </div>
                                 <table class="table table-striped table-hover">
@@ -69,7 +70,7 @@
                               
                                 <div id="generalTabContent" class="tab-content">
                                     <div id="tab-edit" class="tab-pane fade in active">
-                                        <g:form name="changeProfileForm" class="form-horizontal" url="[controller:'user',action:'changeProfile']">
+                                        <g:form name="changeProfileForm" enctype="multipart/form-data" class="form-horizontal" url="[controller:'user',action:'changeProfile']">
                                             <h3>Change Password</h3>
                                            
                                             <div class="form-group"><label class="col-sm-3 control-label">New Password</label>
@@ -122,12 +123,12 @@
 												     <div class="col-sm-9 controls">
 	                                                    <div class="row">
 	                                                        <div class="col-xs-9">
-	                                                            
 	                                                            <label class="radio-inline">
-	                                                            <g:radio name="gender" value="M" checked="true"/>
-	                                                            &nbsp;Male&nbsp;&nbsp;&nbsp;&nbsp;</label>
+	                                                            <g:radio name="gender" value="M" checked="true" />
+	                                                            &nbsp;Male&nbsp;&nbsp;&nbsp;&nbsp;
+	                                                            </label>
 	                                                            <label class="radio-inline">
-	                                                            <g:radio name="gender" value="M" checked="false"/>
+	                                                            <g:radio name="gender" value="F" />
 	                                                            &nbsp;Female&nbsp;&nbsp;&nbsp;&nbsp;</label>
 	                                                            
 	                                                        </div>
@@ -140,7 +141,7 @@
 	                                                        <div class="col-xs-9">
 	                                                            
 	                                                            <label class="radio-inline">
-	                                                            <g:radio name="gender" value="M" checked="false"/>
+	                                                            <g:radio name="gender" value="M" />
 	                                                            &nbsp;Male&nbsp;&nbsp;&nbsp;&nbsp;</label>
 	                                                            <label class="radio-inline">
 	                                                            <g:radio name="gender" value="F" checked="true"/>

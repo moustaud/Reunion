@@ -18,7 +18,6 @@
         left: 73px;
       }
     -->
-
     </style>
 
 </head>
@@ -99,16 +98,22 @@
 	
     $('#add').click(function() {
         var essai=$("#clusterInput").val();
+        var balise;
         $('#clusters').prepend("<span class='label label-success'>"+essai+"</span>"+"<br>"); 
-    	$('#i').prepend("<option >"+essai+"</option>");
+        for (var i=0; i< list.length; i++){
+        	balise=$(document.getElementById(i));
+    		balise.prepend("<option >"+essai+"</option>");
+    	}
     });
     
-    $(function(){     
+    $(function(){    
+    	var aux; 
 		for (var i=0; i< list.length; i++){
 			ligne=list[i];
 			var balise = ("<select id=i>"+"<option >"+"empty"+"</option>"+"</select>");
 			$('#ideas').prepend("<tr>"+"<td width=400>"+ligne[0]+"</td>"+"<td width=33%>"+ligne[1]+"</td>"+"<td width=33%>"+balise+"</td>"+"</tr>");  
-			
+			aux=$('#i');
+			aux.attr('id', i);
 		}
 		$('#ideas').prepend("<tr>"+"<td width=400 >"+"<b>"+"Idea"+"</b>"+"</td>"+"<td width=33%>"+"<b>"+"Author"+"</b>"+"</td>"+"<td width=33%>"+"<b>"+"Cluster"+"</b>"+"</td>"+"</tr>"+"</br>");	
 		
