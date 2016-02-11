@@ -59,6 +59,13 @@
                                     <input id="clusterInput" type="text" name="clusterName" value="" class="form-control" placeholder="Cluster Name">
                                     <button id="add" type="submit" class="btn btn-default btn-sm">Add Cluster</button>
                                     <div id="clusters"></div>
+                                    <table id="ideas"></table>
+                                    
+<table>
+ 
+</table>
+                                    
+                                    
                                 </div>
                                 <g:actionSubmit name="add" class="btn sign" type="submit" value="Add Cluster" controller="user" action="login"/>
                             </g:form>
@@ -89,13 +96,30 @@
 
 
 <script type="text/javascript">
+    
+	var list =[];
+	list[0]=["couleur bleue", "dorra", "empty"]; 
+	list[1]=["couleur jaune", "sadok", "empty"];
+	list[2]=["petite taille", "taeib", "empty"];
 	
     $('#add').click(function() {
         var essai=$("#clusterInput").val();
         $('#clusters').prepend("<span class='label label-success'>"+essai+"</span>"+"<br>");  
     });
+    
+    $(function(){  
+		for (var i=0; i< list.length; i++){
+			ligne=list[i];
+			$('#ideas').prepend("<tr>"+"<td width=400>"+ligne[0]+"</td>"+"<td width=33%>"+ligne[1]+"</td>"+"<td width=33%>"+ligne[2]+"</td>"+"</tr>");  
+		}
+		$('#ideas').prepend("<tr>"+"<td width=400 >"+"<b>"+"Idea"+"</b>"+"</td>"+"<td width=33%>"+"<b>"+"Author"+"</b>"+"</td>"+"<td width=33%>"+"<b>"+"Cluster"+"</b>"+"</td>"+"</tr>"+"</br>");	
+		
+    });
+    
+    
       
 </script>
+
 
 
 </body>
