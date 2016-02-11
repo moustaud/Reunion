@@ -32,6 +32,7 @@
 <!-- Top content -->
 <div class="top-content">
    <h3>${params.message}</h3>
+   <p>${session.user.login}</p>
                               
 </div>
 

@@ -13,6 +13,7 @@ class User {
     String userAddress
     Date birthDay
     Date created = new Date()
+    String salt = null
     String role
     static constraints = {
         firstName maxSize : 30, blank: true, nullable: true
