@@ -18,7 +18,6 @@
         left: 73px;
       }
     -->
-
     </style>
 
 </head>
@@ -54,7 +53,7 @@
                         </div>
                         <div class="form-bottom">
                             <g:form name="clusteringForm" url="[controller:'clustering',action:'login']">
-                                <div class="form-group" id= "corps">
+                                <div class="form-group">
                                     <label class="sr-only" for="login">Clusters</label>
                                     <input id="clusterInput" type="text" name="clusterName" value="" class="form-control" placeholder="Cluster Name">
                                     <button id="add" type="submit" class="btn btn-default btn-sm">Add Cluster</button>
@@ -62,7 +61,7 @@
                                     <table id="ideas"></table>
                                  
                                 </div>
-                                <g:actionSubmit name="add" class="btn sign" type="submit" value="Add Cluster" controller="user" action="login"/>
+                                
                             </g:form>
                         </div>
                     </div>
@@ -98,24 +97,23 @@
 	list[2]=["petite taille", "taeib", "empty"];
 	
     $('#add').click(function() {
-    	var balise;
         var essai=$("#clusterInput").val();
-        $('#clusters').prepend("<span class='label label-success'>"+essai+"</span>"+"<br>");
-        for(var i=0; i< list.length; i++){
-        	balise=$( "corps" ).find( i);
-        	alert(balise);
+        var balise;
+        $('#clusters').prepend("<span class='label label-success'>"+essai+"</span>"+"<br>"); 
+        for (var i=0; i< list.length; i++){
+        	balise=$(document.getElementById(i));
     		balise.prepend("<option >"+essai+"</option>");
     	}
     });
     
-    $(function(){     
+    $(function(){    
+    	var aux; 
 		for (var i=0; i< list.length; i++){
 			ligne=list[i];
-			var balise = $("<select id=i>"+"<option >"+"empty"+"</option>"+"</select>");
-			balise.attr('id', i);
-			log.out(i);
-			$('#ideas').prepend("<tr>"+"<td width=400>"+ligne[0]+"</td>"+"<td width=33%>"+ligne[1]+"</td>"+"<td width=33% id=i>"+"</td>"+"</tr>");  
-			$('#i').append(balise); 
+			var balise = ("<select id=i>"+"<option >"+"empty"+"</option>"+"</select>");
+			$('#ideas').prepend("<tr>"+"<td width=400>"+ligne[0]+"</td>"+"<td width=33%>"+ligne[1]+"</td>"+"<td width=33%>"+balise+"</td>"+"</tr>");  
+			aux=$('#i');
+			aux.attr('id', i);
 		}
 		$('#ideas').prepend("<tr>"+"<td width=400 >"+"<b>"+"Idea"+"</b>"+"</td>"+"<td width=33%>"+"<b>"+"Author"+"</b>"+"</td>"+"<td width=33%>"+"<b>"+"Cluster"+"</b>"+"</td>"+"</tr>"+"</br>");	
 		

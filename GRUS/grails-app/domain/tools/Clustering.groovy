@@ -1,5 +1,5 @@
 package tools
-import gdss.User
+import grus.User
 
 class Clustering {
 	

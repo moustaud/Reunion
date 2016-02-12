@@ -61,7 +61,7 @@
                                     <table id="ideas"></table>
                                  
                                 </div>
-                                <g:actionSubmit name="add" class="btn sign" type="submit" value="Add Cluster" controller="user" action="login"/>
+                                
                             </g:form>
                         </div>
                     </div>
