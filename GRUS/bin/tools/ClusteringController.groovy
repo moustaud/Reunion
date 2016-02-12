@@ -10,23 +10,21 @@ class ClusteringController {
     
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Clustering.list(params), model:[clusteringCount: Clustering.count()]
+        def selectedProcess = Meeting.executeQuery("select a from Process a " +
+			"where a.visible = true or ? = 'admin' group by a.id,a.visible order by a.visible desc,a.title",
+			[session.user?.role], params)
+        respond selectedProcess
+
     }
 
 	def start() {
 		
 				Meeting meeting = Meeting.get(params.id)
-				Brainstorming brainStorming =  
+				//Brainstorming brainstorming = meeting.process.currentPhase.tools(toolId)				
+				
 				log.println("START CLUSTERING")
 		
 				redirect(action:"index", params:[id:params.id,listIdeas:listIdeas])
 			}
-	def lastIdeas() {
-		Meeting meeting = Meeting.get(params.id)
-			
-		
-		def jsona = JSON.parse(meeting.meetingData.json).get("ideaList").toString()
-		render jsona
-	}
+	
 }
