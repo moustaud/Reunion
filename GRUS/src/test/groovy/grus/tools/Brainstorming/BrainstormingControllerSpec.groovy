@@ -4,10 +4,10 @@ import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
+ * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(Idea)
-class IdeaSpec extends Specification {
+@TestFor(BrainstormingController)
+class BrainstormingControllerSpec extends Specification {
 
     def setup() {
     }
