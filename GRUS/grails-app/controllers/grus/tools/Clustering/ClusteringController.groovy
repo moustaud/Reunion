@@ -1,5 +1,6 @@
 package grus.tools.Clustering
 import grus.Tool
+import grus.tools.Brainstorming.Idea
 
 import grus.Meeting
 
@@ -11,31 +12,41 @@ class ClusteringController {
 
     
 
-    def index(Integer max) {
-       /* def selectedProcess = Meeting.executeQuery("select a from Process a " +
-			"where a.visible = true or ? = 'admin' group by a.id,a.visible order by a.visible desc,a.title",
-			[session.user?.role], params)
-        respond selectedProcess*/
-
-    }
+    
 
 	def start() {
-		
+				/*
 				Meeting meeting = Meeting.get(params.id)
 			    def phase= meeting.process.currentPhase  //je récupère la phase courrente
 				for (tool in phase.tools) {   //je cherche le previousTool
 					if (tool.toolId == previousToolId){
 						Tool previousTool=tool
 						def previousT = previousTool.findById(previousToolId)
-						def listIdeas=user.ideas
+						def listIdeas=previousT.ideas
 						  //je cherche la bonne ligne dans le previous Tool
 					}                                   
 					
-				}
-				
-				log.println("START CLUSTERING")
+				}*/
+		/*
+		 def list =[];
+		 def ligne = new Idea(1,"couleur bleue", "dorra");
+		 def ligne=["couleur bleue", "dorra", "empty"];
+		 list.add(ligne);
+		 ligne=["couleur jaune", "sadok", "empty"];
+		 ligne=new Idea(2,"couleur jaune", "sadok");
+		 list.add(ligne);
+		 ligne=["petite taille", "taeib", "empty"];
+		 ligne= new Idea(3,"taille petite", "taeib");
+		 list.add(ligne);
+		 log.println(list)*/
 		
-				redirect(action:"index", params:[id:params.id,listIdeas:listIdeas])
-			}
+		def idea= Idea.findAll()
+		[listIdeas:idea]
+				
+				
+				
+				
+	}
+	
 	
 }

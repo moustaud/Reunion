@@ -3,11 +3,19 @@ import grus.User
 
 class Idea {
 	
-	int ideaId
 	String comment
-	static belongsTo = [author:User]
+	String author
+	//static belongsTo = [author:User]
+	
+	
+
 	
 
     static constraints = {
     }
+	
+	static mapping = {
+		author index : true
+		
+	}
 }
