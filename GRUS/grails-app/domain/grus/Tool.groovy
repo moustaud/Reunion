@@ -2,13 +2,15 @@ package grus
 
 class Tool {
 	
-	int toolId
-	String topic
-	String desciption
-	int previousToolId
-	int followingToolId
+	UUID id	
+	String toolName
+	String toolDesciption
+	UUID previousToolId
+	UUID followingToolId
 	
     static constraints = {
-		topic unique : true
+		id generator : "uuid2"
+		id index : true
+		toolName (blank:false, unique:true)
     }
 }

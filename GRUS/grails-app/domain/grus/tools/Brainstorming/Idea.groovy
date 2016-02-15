@@ -3,19 +3,14 @@ import grus.User
 
 class Idea {
 	
+	UUID id
 	String comment
 	String author
-	//static belongsTo = [author:User]
-	
-	
-
 	
 
     static constraints = {
+		id generator : "uuid2"
+		id index : true
+		comment blanck : false		
     }
-	
-	static mapping = {
-		author index : true
-		
-	}
 }
