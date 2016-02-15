@@ -1,17 +1,18 @@
 package grus
 
 class Process {
-	
-	int processId
+	UUID id	
 	String processName
 	String processDescription
-	Phase currentPhase
+	UUID currentPhaseId
 	
 	static hasMany = [phases : Phase]
-	static belongTo  = [owner : User]
+	static belongsTo  = [facilitator : User, meeting : Meeting ]
 	
 
     static constraints = {
+		id generator : "uuid2"
+		id index : true				
 		processName (blank:false, unique:true)
     }
 }

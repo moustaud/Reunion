@@ -6,9 +6,7 @@ import grus.User
 
 class Clustering extends Tool{
 	
-    String clusterName
-    User clusterCreator
-    static belongsTo = [clusterCreator: User]
+	static hasMany = [ clusters : Cluster]
 
     static constraints = {
     }

@@ -1,4 +1,5 @@
 package grus
+import grus.tools.Data
 
 class Tool {
 	
@@ -7,6 +8,8 @@ class Tool {
 	String toolDesciption
 	UUID previousToolId
 	UUID followingToolId
+	Data data
+	
 	
     static constraints = {
 		id generator : "uuid2"
