@@ -25,7 +25,7 @@ class ClusteringController {
 					def data=previousTool.getByTopic(previousTool.topic)			*/		
 					def data= Data.findAll()
 					[listIdeas:data]
-				}
+			//	}
 				
 	
 		

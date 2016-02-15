@@ -1,5 +1,6 @@
 package grus.tools.Brainstorming
 import java.util.Date;
+import grus.tools.Data
 
 
 import grus.Tool
@@ -8,12 +9,10 @@ import grus.Tool
 class Brainstorming extends Tool {
 		
 	
-	String comment
-	String author
-	Date dateCreated
+	static hasMany = [ data : Data]
 	
     static constraints = {
-		comment blanck : false
+		
 		
     }
 }

@@ -1,12 +1,11 @@
 package grus.tools.Clustering
 import grus.Tool
+import grus.tools.Data
 
-
-import grus.User
 
 class Clustering extends Tool{
 	
-	static hasMany = [ clusters : Cluster]
+	static hasMany = [ data : Data]
 
     static constraints = {
     }
