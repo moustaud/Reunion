@@ -7,8 +7,7 @@ class Process {
 	UUID currentPhaseId
 	
 	static hasMany = [phases : Phase]
-	static belongsTo  = [facilitator : User]
-	static belongsTo = [ meeting : Meeting ]
+	static belongsTo  = [facilitator : User , meeting : Meeting]
 	
 
     static constraints = {

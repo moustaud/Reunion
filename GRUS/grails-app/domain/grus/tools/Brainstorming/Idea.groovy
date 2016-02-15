@@ -1,5 +1,4 @@
 package grus.tools.Brainstorming
-import grus.User
 
 class Idea {
 	
