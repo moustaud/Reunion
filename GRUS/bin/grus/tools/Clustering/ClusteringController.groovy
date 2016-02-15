@@ -1,6 +1,6 @@
 package grus.tools.Clustering
 import grus.Tool
-import grus.tools.Brainstorming.Idea
+
 
 import grus.Meeting
 
@@ -22,7 +22,7 @@ class ClusteringController {
 				
 				if(Tool.getById(currentTool.previousToolId)!=null){
 					def previousTool=Tool.getById(currentTool.previousToolId)
-					def data=previousTool.data.getAll()*/
+					def data=previousTool.getByTopic(previousTool.topic)			*/		
 					def data= Data.findAll()
 					[listIdeas:data]
 				}
