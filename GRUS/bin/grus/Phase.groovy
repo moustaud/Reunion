@@ -6,6 +6,7 @@ class Phase {
 	String phaseDuration
 	
 	static hasMany = [ tools : Tool]
+	static belongsTo =[ process : Process]
 	
 
     static constraints = {
