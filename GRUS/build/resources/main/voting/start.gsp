@@ -47,8 +47,8 @@ div#clusters {
 						<div class="form-box">
 							<div class="form-top">
 								<div class="form-top-left">
-									<h5>Please attribute a rank from 1 to 5 for each idea, then press the
-										button of validation</h5>
+									<h4>Please attribute a rank from 1 to 5 for each idea, then press the
+										button of validation</h4>
 								</div>
 								<div class="form-top-right">
 									<i class="fa fa-key"></i>
