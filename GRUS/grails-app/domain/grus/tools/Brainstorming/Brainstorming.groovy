@@ -5,7 +5,7 @@ import grus.Tool
 
 class Brainstorming extends Tool {
 				
-//	List ideas
+	List<String> ideas
 	static hasMany = [ ideas : Idea]
 	
     static constraints = {

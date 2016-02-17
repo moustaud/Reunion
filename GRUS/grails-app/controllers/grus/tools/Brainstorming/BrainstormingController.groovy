@@ -1,6 +1,5 @@
 package grus.tools.brainstorming
 
-
 import grus.tools.Brainstorming.Brainstorming
 import grus.tools.Brainstorming.Idea
 import org.springframework.messaging.handler.annotation.MessageMapping
@@ -10,17 +9,17 @@ import org.apache.commons.logging.LogFactory
 
 class BrainstormingController {
 
-    def index() { }
+    def index() { 
+
+	}
 
 	@MessageMapping("/brainstorm")
 	@SendTo("/topic/brainstorm")
 	protected String brainstorm(String chatMsg) 
 	{	
-		def brainstorming = Brainstorming.findByToolName("brainstorming 1")
+			
 		def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
-		brainstorming.addToIdeas(idea)
-		brainstorming.save(flush : true)	
-									
+		saveIdeas("brainstorming 1", idea)							
 		def builder = new JsonBuilder()
 		builder 
 		{
@@ -28,7 +27,18 @@ class BrainstormingController {
 			timestamp(new Date().getTime())
 		}
 		builder.toString()
+
 		
 	}
+	
+	
+	static def saveIdeas(brainstormingName, idd) {
+		def brainstorming = Brainstorming.findByToolName(brainstormingName)
+	//	def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
+		println idd.id.toString()
+		brainstorming.appendToIdeas(idd.id.toString())
+		brainstorming.save(flush : true)
+	}
+	
 	
 }

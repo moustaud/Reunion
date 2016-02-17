@@ -6,7 +6,7 @@ class Idea {
 	String author
 	Date dateCreated
 	
-	static belongsTo = Brainstorming
+//	static belongsTo = Brainstorming
 		  
 	static constraints = {
 	}
