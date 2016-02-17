@@ -8,6 +8,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<asset:javascript src="websockets/application.js" />
+<asset:javascript src="websocets/jquery" />
+<asset:javascript src="spring-websocket" />
 <title>Clustering Tool</title>
 
 <style type="text/css">
@@ -55,13 +58,14 @@ div#clusters {
 								</div>
 							</div>
 							<div class="form-bottom">
+								<!-- <g:form name="clusterForm"
+									url="[controller:'clustering',action:'saveClusters']">-->
 
-							
 								<div class="form-group">
 									<label class="sr-only" for="login">Clusters</label> <input
 										id="clusterInput" type="text" name="clusterName" value=""
 										class="form-control" placeholder="Cluster Name">
-									<button id="add" type="submit" class="btn btn-default btn-sm">Add
+									<button id="add" type="button" class="btn btn-default btn-sm">Add
 										Cluster</button>
 									<div id="clusters"></div>
 									<table id="ideas">
@@ -80,7 +84,8 @@ div#clusters {
 												<td width=width=33%>
 													${idea.author}
 												</td>
-												<td width=width=33%><select id="${idea.id}"><option>empty</option></select></td>
+												<td width=width=33%><select name="${idea.id}"
+													id="${idea.id}"><option>empty</option></select></td>
 												</br>
 												</br>
 											</tr>
@@ -89,7 +94,8 @@ div#clusters {
 
 
 								</div>
-
+								<!--	    <g:actionSubmit type ="button" name="validateClustering" class="btn sign"  value="Validate Clustering" controller="clustering" action="saveClusters" />
+                            </g:form>-->
 							</div>
 						</div>
 					</div>
@@ -121,7 +127,28 @@ div#clusters {
 
 
 	
-    $('#add').click(function() {
+    
+    
+    $(function() {
+               
+                var socket = new SockJS("${createLink(uri: '/stomp')}");
+                var client = Stomp.over(socket);
+
+                client.connect({}, function() {
+                    
+                    client.subscribe("/topic/createCluster", function(message) {
+                      console.log(message)
+                        var chatMsg = JSON.parse(JSON.parse(message.body))
+                                         
+	
+
+
+                    });
+                });
+                
+                
+
+                $('#add').click(function() {
     	
         var essai=$("#clusterInput").val();
         //var balise;
@@ -134,8 +161,10 @@ div#clusters {
     	}*/
     	
     	$.each($("select"), function() { $(this).prepend("<option >"+essai+"</option>"); });
+    	client.send("/app/createCluster", {}, JSON.stringify($("#chatMessage").val()));
     });
-    
+                
+            });
     
     
     

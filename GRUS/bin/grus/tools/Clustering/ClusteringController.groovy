@@ -32,16 +32,22 @@ class ClusteringController {
 		//		println data.length()
 				[listIdeas:data]
 			//	}
-				
-	
 		
-		
-		
-				
-				
-				
 				
 	}
 	
+	def saveClusters() {
+		//def brainstorming = Brainstorming.findByToolName(brainstormingName)
+		//def brainstorming = Brainstorming.findById(this.id)
+	//	def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
+	//	println idd.id.toString()
+		//brainstorming.appendToIdeas(idd.id.toString())
+		//brainstorming.save(flush : true)
+		//render id
+	}
+	
+	def createCluster(clusterName){
+		def cluster= new Cluster(data:clusterName).save(flush : true)		
+	}
 	
 }
