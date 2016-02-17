@@ -21,7 +21,7 @@ class BrainstormingController {
 		
 		def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
 		saveIdeas("brainstorming 1", idea)
-		
+		//saveIdeas(idea)
 		def builder = new JsonBuilder()
 		builder 
 		{
@@ -37,6 +37,7 @@ class BrainstormingController {
 	
 	static def saveIdeas(brainstormingName, idd) {
 		def brainstorming = Brainstorming.findByToolName(brainstormingName)
+		//def brainstorming = Brainstorming.findById(this.id)
 	//	def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
 	//	println idd.id.toString()
 		brainstorming.appendToIdeas(idd.id.toString())

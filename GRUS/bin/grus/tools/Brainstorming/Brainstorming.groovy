@@ -1,18 +1,14 @@
 package grus.tools.Brainstorming
 
-import grus.tools.Data
-
-
 import grus.Tool
 
 
 class Brainstorming extends Tool {
-		
-	
-	//static hasMany = [ data : Data]
+				
+	List<String> ideas
+//	static hasMany = [ ideas : Idea]
 	
     static constraints = {
-		
-		
+			
     }
 }

@@ -1,14 +1,18 @@
 package grus.tools.Brainstorming
-import grus.tools.Data
 
-class Idea extends Data{
-	
-	
+class Idea {
+		
 	String comment
 	String author
 	Date dateCreated
-
-    static constraints = {
-		comment blanck : false		
-    }
+	
+//	static belongsTo = Brainstorming
+		  
+	static constraints = {
+	}
+	
+	static mapping = {
+		
+		comment index: true
+		}
 }

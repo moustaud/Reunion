@@ -6,7 +6,7 @@
         <title>Brainstorming phase</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  	<asset:javascript src="websockets/application.js"/>
+  		<asset:javascript src="websockets/application.js"/>
         <asset:javascript src="websocets/jquery" />
         <asset:javascript src="spring-websocket" />
 
@@ -22,7 +22,7 @@
                 client.connect({}, function() {
                     //Subscribe to the 'chat' topic and define a function that is executed
                     //anytime a message is published to that topic by the server or another client.
-                    client.subscribe("/topic/brainstorming", function(message) {
+                    client.subscribe("/topic/brainstorm", function(message) {
                       console.log(message)
                         var chatMsg = JSON.parse(JSON.parse(message.body))
                         var time = '<strong>' + new Date(chatMsg.timestamp).toLocaleTimeString() + '</strong>'                        
@@ -36,7 +36,7 @@
 
                 //When the user sends a chat message publish it to the chat topic
                 $("#sendButton").click(function() {
-                    client.send("/app/brainstorming", {}, JSON.stringify($("#chatMessage").val()));
+                    client.send("/app/brainstorm", {}, JSON.stringify($("#chatMessage").val()));
                 });
             });
         </script>

@@ -1,5 +1,7 @@
 import grus.User
 import grus.tools.Data
+import grus.tools.Brainstorming.Brainstorming
+
 class BootStrap {
 
     def init = { servletContext ->
@@ -13,6 +15,11 @@ class BootStrap {
 	idea2.save()
 	def idea3=new Data(comment:"taille petite", author:"taeib")
 	idea3.save()
+	
+		
+	def brainstorming = new Brainstorming(toolName : "brainstorming 1", toolDescription:" premier meeting")
+	brainstorming.save(flush: true, failOnError : true)
+	
     }
     def destroy = {
     }
