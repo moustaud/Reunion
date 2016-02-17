@@ -15,18 +15,20 @@ class BrainstormingController {
 	@MessageMapping("/brainstorm")
 	@SendTo("/topic/brainstorm")
 	protected String brainstorm(String chatMsg) 
-	{		
-	//	def brainstorming = new Brainstorming(toolName : "brainstorming 1", toolDesciption : " choix stratégique").save(flush: true)
-		def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)		
-	//	brainstorming.addToIdeas(idea)		
-					
+	{	
+		def brainstorming = Brainstorming.findByToolName("brainstorming 1")
+		def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
+		brainstorming.addToIdeas(idea)
+		brainstorming.save(flush : true)	
+									
 		def builder = new JsonBuilder()
 		builder 
 		{
 			message(chatMsg)
 			timestamp(new Date().getTime())
 		}
-		builder.toString()		
+		builder.toString()
+		
 	}
 	
 }

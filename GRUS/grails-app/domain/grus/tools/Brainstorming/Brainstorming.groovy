@@ -4,14 +4,9 @@ import grus.Tool
 
 
 class Brainstorming extends Tool {
-		
-	
+				
+//	List ideas
 	static hasMany = [ ideas : Idea]
-/*	
-	static mapping = {
-		ideas column:'Idea.id',joinTable: false
-	  }
-*/	  
 	
     static constraints = {
 			

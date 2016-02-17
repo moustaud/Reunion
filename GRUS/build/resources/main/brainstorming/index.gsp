@@ -6,7 +6,7 @@
         <title>Brainstorming phase</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  	<asset:javascript src="websockets/application.js"/>
+  		<asset:javascript src="websockets/application.js"/>
         <asset:javascript src="websocets/jquery" />
         <asset:javascript src="spring-websocket" />
 
