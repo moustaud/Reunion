@@ -1,11 +1,13 @@
 package grus.tools.Clustering
+import java.util.List;
+
 import grus.Tool
 import grus.tools.Data
 
 
 class Clustering extends Tool{
 	
-	//static hasMany = [ data : Data]
+	List<String> clusters
 
     static constraints = {
     }

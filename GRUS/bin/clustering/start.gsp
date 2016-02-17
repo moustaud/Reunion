@@ -153,15 +153,11 @@ div#clusters {
         var essai=$("#clusterInput").val();
         //var balise;
         $('#clusters').prepend("<span class='label label-success'>"+essai+"</span>"+"<br>"); 
-        /*
-        
-        for (var i=0; i< listideas.length; i++){
-        	balise=$(document.getElementById(i));
-    		balise.prepend("<option >"+essai+"</option>");
-    	}*/
+      
     	
     	$.each($("select"), function() { $(this).prepend("<option >"+essai+"</option>"); });
-    	client.send("/app/createCluster", {}, JSON.stringify($("#chatMessage").val()));
+    	client.send("/app/createCluster", {}, JSON.stringify($("#clusterInput").val()));
+    	console.log("c'est ok")
     });
                 
             });

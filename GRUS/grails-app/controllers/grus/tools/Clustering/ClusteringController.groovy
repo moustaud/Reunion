@@ -4,6 +4,11 @@ import grus.tools.Brainstorming.*
 
 import grus.Meeting
 import grus.tools.Data
+
+import org.springframework.messaging.handler.annotation.MessageMapping
+import org.springframework.messaging.handler.annotation.SendTo
+import groovy.json.JsonBuilder
+import org.apache.commons.logging.LogFactory
 //import static org.springframework.http.HttpStatus.*
 //import grails.transaction.Transactional
 
@@ -36,18 +41,33 @@ class ClusteringController {
 				
 	}
 	
-	def saveClusters() {
-		//def brainstorming = Brainstorming.findByToolName(brainstormingName)
+	
+	
+	@MessageMapping("/createCluster")
+	@SendTo("/topic/createCluster")
+	
+	protected String createCluster(String clusterName){
+		println(clusterName)
+		def cluster= new Cluster(data :clusterName).save(flush : true)		
+
+		saveClusters("clustering 1", cluster)
+		def builder = new JsonBuilder()
+		builder 
+		{
+			message(clusterName)
+			
+		}
+		builder.toString()
+	}
+	
+	static def saveClusters(clusteringName, clusterid) {
+		def clustering = Clustering.findByToolName(clusteringName)
+		println(clustering)
 		//def brainstorming = Brainstorming.findById(this.id)
 	//	def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
 	//	println idd.id.toString()
-		//brainstorming.appendToIdeas(idd.id.toString())
-		//brainstorming.save(flush : true)
-		//render id
-	}
-	
-	def createCluster(clusterName){
-		def cluster= new Cluster(data:clusterName).save(flush : true)		
+		clustering.appendToClusters(clusterid.id.toString())
+		clustering.save(flush : true)
 	}
 	
 }
