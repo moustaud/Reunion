@@ -60,6 +60,20 @@ class ClusteringController {
 		builder.toString()
 	}
 	
+	
+	@MessageMapping("/selectCluster")
+	@SendTo("/topic/selectCluster")
+	
+	protected String selectCluster(){
+		def clustering = Clustering.findByToolName("clustering 1")
+		def clusters=clustering.clusters.findByData(selectedCluster)
+		clusters.appendToIdeas(idea.id.toString())
+		clustering.save(flush : true)
+		
+
+	}
+	
+	
 	static def saveClusters(clusteringName, clusterid) {
 		def clustering = Clustering.findByToolName(clusteringName)
 		println(clustering)

@@ -58,44 +58,45 @@ div#clusters {
 								</div>
 							</div>
 							<div class="form-bottom">
-								<!-- <g:form name="clusterForm"
-									url="[controller:'clustering',action:'saveClusters']">-->
+								<g:form name="clusterForm"
+									url="[controller:'clustering',action:'saveClusters']">
 
-								<div class="form-group">
-									<label class="sr-only" for="login">Clusters</label> <input
-										id="clusterInput" type="text" name="clusterName" value=""
-										class="form-control" placeholder="Cluster Name">
-									<button id="add" type="button" class="btn btn-default btn-sm">Add
-										Cluster</button>
-									<div id="clusters"></div>
-									<table id="ideas">
-										<tr>
-											<td width=400><b>Idea</b></td>
-											<td width=33%><b>Author</b></td>
-											<td width=33%><b>Cluster</b></td>
-										</tr>
-										</br>
-										<g:each var="idea" in="${listIdeas}">
-
+									<div class="form-group">
+										<label class="sr-only" for="login">Clusters</label> <input
+											id="clusterInput" type="text" name="clusterName" value=""
+											class="form-control" placeholder="Cluster Name">
+										<button id="add" type="button" class="btn btn-default btn-sm">Add
+											Cluster</button>
+										<div id="clusters"></div>
+										<table id="ideas">
 											<tr>
-												<td width=400>
-													${idea.comment}
-												</td>
-												<td width=width=33%>
-													${idea.author}
-												</td>
-												<td width=width=33%><select name="${idea.id}"
-													id="${idea.id}"><option>empty</option></select></td>
-												</br>
-												</br>
+												<td width=400><b>Idea</b></td>
+												<td width=33%><b>Author</b></td>
+												<td width=33%><b>Cluster</b></td>
 											</tr>
-										</g:each>
-									</table>
+											</br>
+											<g:each var="idea" in="${listIdeas}">
+
+												<tr>
+													<td width=400>
+														${idea.comment}
+													</td>
+													<td width=width=33%>
+														${idea.author}
+													</td>
+													<td width=width=33%><select name="${idea.id}"
+														id="${idea}" onchange="changeFunc(id);"><option>empty</option></select></td>
+													</br>
+													</br>
+												</tr>
+											</g:each>
+										</table>
 
 
-								</div>
-								<!--	    <g:actionSubmit type ="button" name="validateClustering" class="btn sign"  value="Validate Clustering" controller="clustering" action="saveClusters" />
-                            </g:form>-->
+									</div>
+									<button type="submit" class="btn btn-green btn-block">Finish
+										Clustering</button>
+								</g:form>
 							</div>
 						</div>
 					</div>
@@ -148,19 +149,40 @@ div#clusters {
                 
                 
 
-                $('#add').click(function() {
+        $('#add').click(function() {
     	
         var essai=$("#clusterInput").val();
-        //var balise;
+       
         $('#clusters').prepend("<span class='label label-success'>"+essai+"</span>"+"<br>"); 
       
     	
     	$.each($("select"), function() { $(this).prepend("<option >"+essai+"</option>"); });
     	client.send("/app/createCluster", {}, JSON.stringify($("#clusterInput").val()));
-    	console.log("c'est ok")
+    	
     });
                 
+                
+                
+    
             });
+     
+    
+    
+        function changeFunc(selectId) {
+    var selectBox = document.getElementById(selectId);
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    //alert(selectId);
+    $.post("/app/selectCluster",
+    {
+        selectedCluster: selectedValue,
+        idea: selectId
+    },
+    function() {
+                     alert("cooo");
+                  }
+    );
+    //client.send("/app/selectCluster", {}, JSON.stringify(selectedValue),JSON.stringify(selectId));
+   }
     
     
     
