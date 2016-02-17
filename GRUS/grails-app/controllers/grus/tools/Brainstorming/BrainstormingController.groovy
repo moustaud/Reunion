@@ -18,8 +18,10 @@ class BrainstormingController {
 	protected String brainstorm(String chatMsg) 
 	{	
 			
+		
 		def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
-		saveIdeas("brainstorming 1", idea)							
+		saveIdeas("brainstorming 1", idea)
+		
 		def builder = new JsonBuilder()
 		builder 
 		{
@@ -28,6 +30,7 @@ class BrainstormingController {
 		}
 		builder.toString()
 
+
 		
 	}
 	
@@ -35,9 +38,9 @@ class BrainstormingController {
 	static def saveIdeas(brainstormingName, idd) {
 		def brainstorming = Brainstorming.findByToolName(brainstormingName)
 	//	def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
-		println idd.id.toString()
+	//	println idd.id.toString()
 		brainstorming.appendToIdeas(idd.id.toString())
-		brainstorming.save(flush : true)
+		brainstorming.save(flush : true)		
 	}
 	
 	

@@ -29,6 +29,7 @@ class ClusteringController {
 				def previousTool=Brainstorming.findByToolName("brainstorming 1")
 				println previousTool.ideas
 				def data = Idea.findAllByIdInList(previousTool.ideas)
+		//		println data.length()
 				[listIdeas:data]
 			//	}
 				
