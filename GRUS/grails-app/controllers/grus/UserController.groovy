@@ -14,6 +14,7 @@ class UserController {
     }
     def logout(){
     	session.user = null;
+    	redirect(controller: "page", action: "index")
 	}
     def login(){
 
@@ -24,7 +25,7 @@ class UserController {
 					def userSalt = user.salt
 					def passHash = Password.getHashWithSalt(params.password, userSalt, "SHA-1")
 					if( user.password == passHash) {
-						def userInfoToSave = new User(firstName: user.firstName,lastName: user.lastName,login: user.login,role:user.role)
+						def userInfoToSave = new User(firstName: user.firstName,lastName: user.lastName,login: user.login,role:user.role,picture:user.picture)
 						session.user=userInfoToSave
 						redirect(controller: "user", action: "dashboard")					
 					}
@@ -49,7 +50,7 @@ class UserController {
 				try{
 					def userSalt = Password.generateSalt()
 					def passHash = Password.getHashWithSalt(params.password, userSalt, "SHA-1")
-					User user = new User(firstName:params.firstName,lastName:params.lastName,login:params.login, email:params.email, password:passHash,role:"user",salt:userSalt)
+					User user = new User(firstName:params.firstName,lastName:params.lastName,login:params.login, email:params.email, password:passHash,role:"user",salt:userSalt,picture:"/users/default.gif")
 					user.save(flush: true,failOnError: true)
 					user = User.findByLogin(user.login)
 					def userInfoToSave = new User(firstName: user.firstName,lastName: user.lastName,login: user.login,role:user.role)
@@ -105,8 +106,43 @@ class UserController {
     def chnageProfileForm(){
         render(view: "changeProfile",prams:params)
     }
-    
-
+    def uploadImage() {
+	    def f = request.getFile('picture')
+	    if (f.empty) {
+	    	flash.messageTitle ="Error ! in uploading image"
+	        flash.message = 'file cannot be empty'
+	        flash.messageType= "note-danger"
+	        render(view: 'userNotification')
+	        return
+	    }
+	    def picture =grailsApplication.config.pathForGrailsApp+assetPath(src: "images/users/"+session.user.login+".jpg")
+	    f.transferTo(new File(picture))
+	    def user = User.findByLogin(session.user.login)
+	    user.setPicture("users/"+user.login+".jpg")
+	    user.save(failOnError: true,flush: true)
+	    session.user.picture = "users/"+user.login+".jpg"
+	    redirect(action:"profile", user:user)
+	}
+	static def userNotification(){
+		
+	}
+	def isFacilitator(){
+		if(session.user.role == "facilitator"){
+			return true
+		}
+		else{
+			return false
+		}
+	}
+	def isAdmin(){
+		if(session.user.role == "admin"){
+			return true
+		}
+		else{
+			return false
+		}
+	}
+	
 	
 	
 	
