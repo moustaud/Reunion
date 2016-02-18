@@ -1,4 +1,6 @@
 import grus.User
+import grus.ProcessModel
+import grus.Meeting
 import grus.tools.Data
 import grus.tools.Brainstorming.Brainstorming
 import grus.tools.Clustering.Clustering

@@ -171,12 +171,16 @@ div#clusters {
         function changeFunc(selectId) {
     var selectBox = document.getElementById(selectId);
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    alert(selectId);
+    //alert(selectId);
     $.post("/app/selectCluster",
     {
         selectedCluster: selectedValue,
         idea: selectId
     },
+    function() {
+                     alert("cooo");
+                  }
+    );
     //client.send("/app/selectCluster", {}, JSON.stringify(selectedValue),JSON.stringify(selectId));
    }
     
