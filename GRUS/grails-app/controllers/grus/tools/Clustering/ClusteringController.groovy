@@ -67,7 +67,41 @@ class ClusteringController {
 		def clustering = Clustering.findByToolName("clustering 1")
 		def selectId = request.getParameter("SelectId")
 		def selectedCluster = request.getParameter("SelectedValue")
-		def clusters=Cluster.findByData(selectedCluster)
+		def clusters=Cluster.findAll()
+		println (clusters)
+		clusters.each {
+			def cluster=Cluster.findByData(it.data)
+			println("it.data")
+			println(it.data)
+			if(cluster.ideas!=null){
+				println ("cluster.ideas!=null")
+				println("selectId")
+				println(selectId.getClass())
+				println("cluster.ideas")
+				println(cluster.ideas)
+				def ideas=cluster.ideas
+				println(cluster.ideas[0].getClass())
+				
+				println(ideas.contains(selectId))
+				if(ideas.contains(selectId)){
+					def idea=Idea.findByIdInList(cluster.ideas,selectId)
+					println ("ideas")
+					println (idea.comment)
+	
+					println ("ideas.containsValue(selectId)")
+				
+			
+					cluster.deleteFromIdeas(idea.id.toString(),[flush:true])
+				
+					println("ok")
+				}
+			
+			
+			}
+		}
+		
+		
+		 clusters=Cluster.findByData(selectedCluster)
 		def idea = Idea.findById(selectId)
 		clusters.appendToIdeas(idea.id.toString())
 		clusters.save(flush : true)
