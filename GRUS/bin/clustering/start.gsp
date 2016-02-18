@@ -66,8 +66,9 @@ div#clusters {
 											class="form-control" placeholder="Cluster Name">
 										<button id="add" type="button" class="btn btn-default btn-sm">Add
 											Cluster</button>
+											</br>
+										<div id="error"></div>
 										<div id="clusters"></div>
-										<div id="msg"></div>
 										<table id="ideas">
 											<tr>
 												<td width=400><b>Idea</b></td>
@@ -149,12 +150,38 @@ div#clusters {
         $('#add').click(function() {
     	
         var essai=$("#clusterInput").val();
+        var bool=true;
+        console.log(bool);
+        
        
-        $('#clusters').prepend("<span class='label label-success'>"+essai+"</span>"+"<br>"); 
-      
+    		$("span").each(function(){
+        		console.log("span");
+        		console.log($(this).text());
+        		console.log(essai);
+        		if($(this).text()==essai){
+        			bool=false;
+        			$('#clusterInput').val("Please enter a different cluster");
+        		
+        		}
+    		});
+		 /*
+        
+        $.each($("span"), function() { 
+        	console.log("span");
+        	if($(this).val()==essai){
+        		bool=false;
+        		$('#error').val("Please enter a different cluster");
+        		
+        	}
+        });*/
+       	
+       	if(bool==true){
+        	$('#clusters').prepend("<span class='label label-success'>"+essai+"</span>"+"<br>"); 
+        	$.each($("select"), function() { $(this).prepend("<option >"+essai+"</option>"); });
+    		client.send("/app/createCluster", {}, JSON.stringify($("#clusterInput").val()));
+      	}
     	
-    	$.each($("select"), function() { $(this).prepend("<option >"+essai+"</option>"); });
-    	client.send("/app/createCluster", {}, JSON.stringify($("#clusterInput").val()));
+    	
     	
     });
           
