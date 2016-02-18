@@ -32,7 +32,7 @@ class ClusteringController {
 			//		[listIdeas:data]
 			
 				def previousTool=Brainstorming.findByToolName("brainstorming 1")
-				println previousTool.ideas
+				
 				def data = Idea.findAllByIdInList(previousTool.ideas)
 		//		println data.length()
 				[listIdeas:data]
@@ -47,7 +47,7 @@ class ClusteringController {
 	@SendTo("/topic/createCluster")
 	
 	protected String createCluster(String clusterName){
-		println(clusterName)
+	
 		def cluster= new Cluster(data :clusterName).save(flush : true)		
 
 		saveClusters("clustering 1", cluster)
@@ -61,14 +61,17 @@ class ClusteringController {
 	}
 	
 	
-	@MessageMapping("/selectCluster")
-	@SendTo("/topic/selectCluster")
 	
-	protected String selectCluster(){
+	
+	def selectCluster(){
 		def clustering = Clustering.findByToolName("clustering 1")
-		def clusters=clustering.clusters.findByData(selectedCluster)
+		def selectId = request.getParameter("SelectId")
+		def selectedCluster = request.getParameter("SelectedValue")
+		def clusters=Cluster.findByData(selectedCluster)
+		def idea = Idea.findById(selectId)
 		clusters.appendToIdeas(idea.id.toString())
-		clustering.save(flush : true)
+		clusters.save(flush : true)
+		
 		
 
 	}
@@ -76,10 +79,6 @@ class ClusteringController {
 	
 	static def saveClusters(clusteringName, clusterid) {
 		def clustering = Clustering.findByToolName(clusteringName)
-		println(clustering)
-		//def brainstorming = Brainstorming.findById(this.id)
-	//	def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
-	//	println idd.id.toString()
 		clustering.appendToClusters(clusterid.id.toString())
 		clustering.save(flush : true)
 	}

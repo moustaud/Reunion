@@ -15,6 +15,9 @@ class User {
     Date created = new Date()
     String salt = null
     String role
+    List<String> meetingsFacilitated
+    List<String> meetingsParticipatedIn    
+    
     static constraints = {
         firstName maxSize : 30, blank: true, nullable: true
         lastName  maxSize : 30, blank: true, nullable: true
@@ -32,5 +35,7 @@ class User {
     static mapping = {
 		login index : true
 		email index : true
+        role index :true
+        
 	}
 }

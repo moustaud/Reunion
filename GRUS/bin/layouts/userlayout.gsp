@@ -22,7 +22,9 @@
     <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'stylesheets',file:'style-responsive.css.css')}" />
     <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'stylesheets',file:'zabuto_calendar.min.css')}" />
     <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'stylesheets',file:'pace.css')}" />
-	<g:layoutHead/>
+    <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'stylesheets',file:'jquery.news-ticker.css')}" />
+    
+    <g:layoutHead/>
 </head>
 <body>
     <div>
@@ -52,7 +54,7 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
                         
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="${assetPath(src: 'avatar/48.jpg')}" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">${session.user.login}</span>&nbsp;<span class="caret"></span></a>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="${assetPath(src: session.user.picture)}" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">${session.user.login}</span>&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
                             <li><a href="${createLink(controller:'user', action:'profile')}"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
@@ -77,14 +79,16 @@
                 <ul id="side-menu" class="nav">
                     
                      <div class="clearfix"></div>
-                    <li><a href="Dashboard.html"><i class="fa fa-tachometer fa-fw">
+                     
+                    <li><a href="${createLink(controller:'user', action:'dashboard')}"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
                   
-           
-                    <li><a href="Meetings.html"><i class="fa fa-send-o fa-fw">
+                    <li><a href="${createLink(controller:'meeting', action:'myMeetings')}"><i class="fa fa-send-o fa-fw">
                         <div class="icon-bg bg-green"></div>
-                    </i><span class="menu-title">Meetings</span></a></li></li>
+                    </i><span class="menu-title">Meetings</span></a>
+
+                </li>
 
 
                     <li><a href="Groups.html"><i class="fa fa-group fa-fw">
@@ -111,15 +115,28 @@
             <!--END PAGE WRAPPER-->
         </div>
     </div>
+    
+    
     <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'jquery-1.10.2.min.js')}"></script>
     <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'jquery-migrate-1.2.1.min.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'jquery-ui.js')}"></script>
     <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'bootstrap.min.js')}"></script>
     <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'bootstrap-hover-dropdown.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'html5shiv.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'respond.min.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'jquery.metisMenu.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'jquery.slimscroll.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'jquery.cookie.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'custom.min.js')}"></script>
     <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'jquery.menu.js')}"></script>
-     
+    <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'holder.js')}"></script>
+
+
+
+	<g:pageProperty name="page.javascripts"/>
     <!--CORE JAVASCRIPT-->
     <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'main.js')}"></script>
-     
+     <g:pageProperty name="page.javascripts"/>
     <script>        (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -134,5 +151,7 @@
         ga('create', 'UA-145464-12', 'auto');
         ga('send', 'pageview');
     </script>
+    
 </body>
 </html>
+	

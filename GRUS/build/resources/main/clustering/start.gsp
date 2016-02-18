@@ -58,8 +58,7 @@ div#clusters {
 								</div>
 							</div>
 							<div class="form-bottom">
-								<g:form name="clusterForm"
-									url="[controller:'clustering',action:'saveClusters']">
+							
 
 									<div class="form-group">
 										<label class="sr-only" for="login">Clusters</label> <input
@@ -68,6 +67,7 @@ div#clusters {
 										<button id="add" type="button" class="btn btn-default btn-sm">Add
 											Cluster</button>
 										<div id="clusters"></div>
+										<div id="msg"></div>
 										<table id="ideas">
 											<tr>
 												<td width=400><b>Idea</b></td>
@@ -85,7 +85,7 @@ div#clusters {
 														${idea.author}
 													</td>
 													<td width=width=33%><select name="${idea.id}"
-														id="${idea}" onchange="changeFunc(id);"><option>empty</option></select></td>
+														id="${idea.id}" onchange="changeFunc(id);"><option>empty</option></select></td>
 													</br>
 													</br>
 												</tr>
@@ -94,9 +94,7 @@ div#clusters {
 
 
 									</div>
-									<button type="submit" class="btn btn-green btn-block">Finish
-										Clustering</button>
-								</g:form>
+									
 							</div>
 						</div>
 					</div>
@@ -138,7 +136,6 @@ div#clusters {
                 client.connect({}, function() {
                     
                     client.subscribe("/topic/createCluster", function(message) {
-                      console.log(message)
                         var chatMsg = JSON.parse(JSON.parse(message.body))
                                          
 	
@@ -160,8 +157,7 @@ div#clusters {
     	client.send("/app/createCluster", {}, JSON.stringify($("#clusterInput").val()));
     	
     });
-                
-                
+          
                 
     
             });
@@ -169,19 +165,19 @@ div#clusters {
     
     
         function changeFunc(selectId) {
-    var selectBox = document.getElementById(selectId);
+    		var selectBox = document.getElementById(selectId);
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    //alert(selectId);
-    $.post("/app/selectCluster",
-    {
-        selectedCluster: selectedValue,
-        idea: selectId
-    },
-    function() {
-                     alert("cooo");
-                  }
-    );
-    //client.send("/app/selectCluster", {}, JSON.stringify(selectedValue),JSON.stringify(selectId));
+  
+  	$.ajax({
+            type: "POST",
+            url: "/Clustering/selectCluster",
+            data: { SelectId: selectId, SelectedValue: selectedValue },
+            
+        });
+    
+ 
+
+
    }
     
     
