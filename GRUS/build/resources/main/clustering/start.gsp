@@ -86,7 +86,7 @@ div#clusters {
 														${idea.author}
 													</td>
 													<td width=width=33%><select name="${idea.id}"
-														id="${idea.id}" onchange="changeFunc(id);"><option>empty</option></select></td>
+														id="${idea.id}" onchange="changeFunc(id);"></select></td>
 													</br>
 													</br>
 												</tr>
@@ -125,7 +125,7 @@ div#clusters {
 
 	<script type="text/javascript">
 
-
+	// il reste le test si c'est le facilitateur ou pas
 	
     
     
@@ -164,16 +164,7 @@ div#clusters {
         		
         		}
     		});
-		 /*
-        
-        $.each($("span"), function() { 
-        	console.log("span");
-        	if($(this).val()==essai){
-        		bool=false;
-        		$('#error').val("Please enter a different cluster");
-        		
-        	}
-        });*/
+		 
        	
        	if(bool==true){
         	$('#clusters').prepend("<span class='label label-success'>"+essai+"</span>"+"<br>"); 
@@ -181,7 +172,7 @@ div#clusters {
     		client.send("/app/createCluster", {}, JSON.stringify($("#clusterInput").val()));
       	}
     	
-    	
+    	$("#clusterInput").val("");
     	
     });
           

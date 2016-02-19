@@ -34,6 +34,7 @@ class ClusteringController {
 				def previousTool=Brainstorming.findByToolName("brainstorming 1")
 				
 				def data = Idea.findAllByIdInList(previousTool.ideas)
+				
 		//		println data.length()
 				[listIdeas:data]
 			//	}
@@ -71,29 +72,10 @@ class ClusteringController {
 		println (clusters)
 		clusters.each {
 			def cluster=Cluster.findByData(it.data)
-			println("it.data")
-			println(it.data)
-			if(cluster.ideas!=null){
-				println ("cluster.ideas!=null")
-				println("selectId")
-				println(selectId.getClass())
-				println("cluster.ideas")
-				println(cluster.ideas)
-				def ideas=cluster.ideas
-				println(cluster.ideas[0].getClass())
-				
-				println(ideas.contains(selectId))
-				if(ideas.contains(selectId)){
-					def idea=Idea.findByIdInList(cluster.ideas,selectId)
-					println ("ideas")
-					println (idea.comment)
-	
-					println ("ideas.containsValue(selectId)")
-				
-			
-					cluster.deleteFromIdeas(idea.id.toString(),[flush:true])
-				
-					println("ok")
+			if(cluster.ideas!=null){	
+				def ideasCluster=cluster.ideas
+				if(ideasCluster.contains(selectId)){
+					cluster.deleteFromIdeas(selectId.toString(),[flush:true])
 				}
 			
 			
@@ -102,8 +84,8 @@ class ClusteringController {
 		
 		
 		 clusters=Cluster.findByData(selectedCluster)
-		def idea = Idea.findById(selectId)
-		clusters.appendToIdeas(idea.id.toString())
+		//def idea = Idea.findById(selectId)
+		clusters.appendToIdeas(selectId)
 		clusters.save(flush : true)
 		
 		
