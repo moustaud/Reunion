@@ -7,20 +7,21 @@ class Tool {
 //	UUID id
 	String toolName
 	String toolDescription
+	//for decoration
+	String icon = "fa-star"
+	String label ="label-red"
+	
 //	UUID previousToolId
 //	Data data	
 	
 
-    static constraints = {
-	//	id generator : "uuid2"
-	//	id index : true	
-	//	toolName (blank:false, unique:true)
+   static constraints = {
+		toolName nullable: false,blank:false, unique : true
     }
 	
 	
 	static mapping = {
-	
-	toolName index: true
+		toolName index: true
 	}
 
 }

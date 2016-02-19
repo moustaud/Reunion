@@ -1,13 +1,14 @@
 package grus
 
 class ProcessModel {
-	String name
-
+	String processModelName
+	String processModelDescription
+	Map<Integer,String> phasesOfModel
     static constraints = {
-    	name maxSize : 100, blank: false, nullable: false, unique : true
+    	processModelName maxSize : 100, blank: false, nullable: false, unique : true
     }
     static mapping = {
-		name index : true
+		processModelName index : true
 		
 	}
 	
