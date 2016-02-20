@@ -58,26 +58,62 @@ div#clusters {
 
 							
 								<div class="form-group">
+									<g:if test="${previousToul == 'Brainstorming'}">
 									<table id="ideas">
 										<tr>
 											<td width=400><b>Idea</b></td>
+											<td width=400><b>Author</b></td>
 											<td width=33%><b>Ranking</b></td>
 										</tr>
 										</br>
+										
 										<g:each var="data" in="${listData}">
 
 											<tr>
 												<td width=400>
 													${data.data}
 												</td>
+												<td width=400>
+													${data.author}
+												</td>
 												
-												<td width=width=33%><select id="${data.id}"><option>-Please vote-</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></td>
+												<td width=width=33%><select id="${data.id}"><option>-Please vote-</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td>
 												</br>
 												</br>
 											</tr>
 										</g:each>
 									</table>
+									</g:if>
+									<g:else>
+     									<table id="ideas">
+										<tr>
+											<td width=400><b>Cluster</b></td>
+											<td width=400><b>Ideas</b></td>
+											<td width=33%><b>Ranking</b></td>
+										</tr>
+										</br>
+										
+										<g:each var="data" in="${listData}">
 
+											<tr>
+												<td width=400>
+													${data.data}
+												</td>
+												<td width=400>
+													<select id="${data.id}" style="width:120px">
+														<g:each var="idea" in="${ideas[data.data]}">
+															<option>${idea}</option>
+														</g:each>
+													</select>
+												</td>
+												
+												<td width=width=33%><select id="${data.id}"><option>-Please vote-</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td>
+												</br>
+												</br>
+											</tr>
+										</g:each>
+									</table>
+									</g:else>
 
 								</div>
 
@@ -110,25 +146,6 @@ div#clusters {
 
 	<script type="text/javascript">
 
-/*
-	
-    $('#add').click(function() {
-    	
-        var essai=$("#clusterInput").val();
-        //var balise;
-        $('#clusters').prepend("<span class='label label-success'>"+essai+"</span>"+"<br>"); 
-        /*
-        
-        for (var i=0; i< listData.length; i++){
-        	balise=$(document.getElementById(i));
-    		balise.prepend("<option >"+essai+"</option>");
-    	}*/
-    	
-    	$.each($("select"), function() { $(this).prepend("<option >"+essai+"</option>"); });
-    });
-    */
-    
-    
     
     
       

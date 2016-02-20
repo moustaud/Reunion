@@ -19,14 +19,58 @@ class VotingController {
 			//		def data= Data.findAll()
 			//		[listIdeas:data]
 			
-				//def previousTool = Brainstorming.findByToolName("brainstorming 1")
-				def previousTool = Clustering.findByToolName("clustering 1")
+				def previousTool = Brainstorming.findByToolName("brainstorming 1")
+				//def previousTool = Clustering.findByToolName("clustering 1")
 				
-				//def data = Idea.findAllByIdInList(previousTool.ideas)
-				def data = Cluster.findAllByIdInList(previousTool.clusters)
+				def data = Idea.findAllByIdInList(previousTool.ideas)
+				//def data = Cluster.findAllByIdInList(previousTool.clusters)
+				def previousToolType="Brainstorming"
+				def ideas = [:]
 				
-				[listData:data]
-			//	}
+				if(previousTool instanceof Clustering){
+					println("clustering")
+				}else if (previousTool instanceof Brainstorming){
+				println("brainstorming")
+				}
+				/*
+				
+				data.each{ n->
+					def listIdea=[]
+					def ligne=n.ideas
+					def clusterName=n.data
+					ligne.each{s ->
+						def idea = Idea.findById(s)
+						listIdea.push(idea.data)
+					}
+					ideas.put(clusterName,listIdea)
+					
+					
+				}
+				
+				*/
+				/*
+				if(previousToul instanceof Clustering){
+					previousToolType="Clustering"
+					def data = Cluster.findAllByIdInList(previousTool.clusters)
+					data.each{ n->
+					def listIdea=[]
+					def ligne=n.ideas
+					def clusterName=n.data
+					ligne.each{s ->
+						def idea = Idea.findById(s)
+						listIdea.push(idea.data)
+					}
+					ideas.put(clusterName,listIdea)
+					
+				}
+				
+				}else if(previousToul instanceof Brainstorming){
+					def data = Idea.findAllByIdInList(previousTool.ideas)
+					previousToolType="Brainstorming"
+				}*/
+				
+				[listData:data, previousToul:previousToolType, ideas:ideas]
+			
 		
 				
 	}
