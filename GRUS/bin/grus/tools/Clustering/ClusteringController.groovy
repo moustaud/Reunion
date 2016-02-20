@@ -9,6 +9,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import groovy.json.JsonBuilder
 import org.apache.commons.logging.LogFactory
+import groovy.json.JsonSlurper 
 //import static org.springframework.http.HttpStatus.*
 //import grails.transaction.Transactional
 
@@ -66,29 +67,14 @@ class ClusteringController {
 	
 	def selectCluster(){
 		def clustering = Clustering.findByToolName("clustering 1")
-		def selectId = request.getParameter("SelectId")
-		def selectedCluster = request.getParameter("SelectedValue")
-		def clusters=Cluster.findAll()
-		println (clusters)
-		clusters.each {
-			def cluster=Cluster.findByData(it.data)
-			if(cluster.ideas!=null){	
-				def ideasCluster=cluster.ideas
-				if(ideasCluster.contains(selectId)){
-					cluster.deleteFromIdeas(selectId.toString(),[flush:true])
-				}
+		def clusteringOutput = request.getParameter("clusters")
+		def jsonObj = new JsonSlurper().parseText(clusteringOutput)
+		jsonObj.each{
+			def cluster=Cluster.findByData(it."clusterData")
+			cluster.appendToIdeas(it."ideaId")
+			cluster.save(flush : true)
 			
-			
-			}
 		}
-		
-		
-		 clusters=Cluster.findByData(selectedCluster)
-		//def idea = Idea.findById(selectId)
-		clusters.appendToIdeas(selectId)
-		clusters.save(flush : true)
-		
-		
 
 	}
 	

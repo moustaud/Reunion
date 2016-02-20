@@ -86,13 +86,14 @@ div#clusters {
 														${idea.author}
 													</td>
 													<td width=width=33%><select name="${idea.id}"
-														id="${idea.id}" onchange="changeFunc(id);"></select></td>
+														id="${idea.id}" ></select></td>
 													</br>
 													</br>
 												</tr>
 											</g:each>
 										</table>
-
+										<button id="validate" type="button"
+										class="btn btn-default btn-sm">Validate Clustering</button>
 
 									</div>
 									
@@ -180,23 +181,39 @@ div#clusters {
     
             });
      
-    
-    
-        function changeFunc(selectId) {
-    		var selectBox = document.getElementById(selectId);
-    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
   
-  	$.ajax({
+   
+   
+   
+   $('#validate').click(function() {
+   
+   				
+   				var clusters = [];
+   				
+   				
+    	
+        		$.each($("select"), function() { 
+        			var ideaId=($(this).attr('id'));
+        			var clusterData =$(this).val();
+        			
+        			var cluster = {
+    					"ideaId": ideaId,
+    					"clusterData": clusterData
+					}
+        			
+        			clusters.push(cluster);
+        			
+        		});
+       			
+        		$.ajax({
             type: "POST",
             url: "/Clustering/selectCluster",
-            data: { SelectId: selectId, SelectedValue: selectedValue },
+            data: { clusters: JSON.stringify(clusters),},
             
         });
+    	
+    });  
     
- 
-
-
-   }
     
     
     

@@ -4,6 +4,7 @@ import grus.Meeting
 import grus.tools.Data
 import grus.tools.Brainstorming.Brainstorming
 import grus.tools.Clustering.Clustering
+import grus.Tool
 
 class BootStrap {
 
@@ -81,6 +82,13 @@ class BootStrap {
 		meeting02.save(flush:true)
 		meeting03.save(flush:true)
 		meeting04.save(flush:true)
+		/*Tool modelProcess ModelPhase*/
+		def tool01 =  new Tool(toolName:"Brainstorm",toolDescription:"a tool that's let you echange ideas",icon:"fa-users",label:"label-yellow")
+		def tool02 =  new Tool(toolName:"Clusturing",toolDescription:"make a cluster of group of ideas",icon:"fa-puzzle-piece",label:"label-blue")
+		def tool03 =  new Tool(toolName:"Voting",toolDescription:"let you make a vote a bout a topic",icon:"fa-thumbs-o-up",label:"label-orange")
+		tool01.save(flush:true)
+		tool02.save(flush:true)
+		tool03.save(flush:true)
 	//moustapha test
 	def idea1=new Data(comment:"couleur rouge", author:"dorra")
 	idea1.save()
