@@ -80,7 +80,7 @@ div#clusters {
 
 												<tr>
 													<td width=400>
-														${idea.comment}
+														${idea.data}
 													</td>
 													<td width=width=33%>
 														${idea.author}

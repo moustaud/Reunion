@@ -90,12 +90,7 @@ class BootStrap {
 		tool02.save(flush:true)
 		tool03.save(flush:true)
 	//moustapha test
-	def idea1=new Data(comment:"couleur rouge", author:"dorra")
-	idea1.save()
-	def idea2=new Data(comment:"couleur jaune", author:"sadok")
-	idea2.save()
-	def idea3=new Data(comment:"taille petite", author:"taeib")
-	idea3.save()
+	
 	
 		
 	def brainstorming = new Brainstorming(toolName : "brainstorming 1", toolDescription:" premier meeting")

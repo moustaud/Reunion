@@ -19,7 +19,7 @@ class BrainstormingController {
 	{	
 			
 		
-		def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
+		def idea = new Idea(data : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
 		saveIdeas("brainstorming 1", idea)
 		//saveIdeas(idea)
 		def builder = new JsonBuilder()

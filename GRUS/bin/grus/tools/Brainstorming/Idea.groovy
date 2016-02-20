@@ -2,7 +2,7 @@ package grus.tools.Brainstorming
 
 class Idea {
 		
-	String comment
+	String data
 	String author
 	Date dateCreated
 	
@@ -13,6 +13,6 @@ class Idea {
 	
 	static mapping = {
 		
-		comment index: true
+		data index: true
 		}
 }
