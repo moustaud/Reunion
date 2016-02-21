@@ -1,6 +1,6 @@
 package grus.tools.Brainstorming
 
-class Idea {
+class Idea implements Comparable {
 		
 	String data
 	String author
@@ -15,4 +15,8 @@ class Idea {
 		
 		data index: true
 		}
+	
+	int compareTo(obj) {
+		dateCreated.compareTo(obj.dateCreated)
+	}
 }

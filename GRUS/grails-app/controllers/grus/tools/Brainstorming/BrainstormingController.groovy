@@ -54,13 +54,9 @@ class BrainstormingController {
 		{
 			this.ideas = Tool.findById(idPrevious).ideas
 			this.save(flush : true)
-		//	render "migration ok !!!"
 		}
 		
 	}
-	
-	
-	
-	
+
 	
 }
