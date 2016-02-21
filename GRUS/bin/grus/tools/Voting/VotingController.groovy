@@ -20,20 +20,20 @@ class VotingController {
 			//		def data= Data.findAll()
 			//		[listIdeas:data]
 			
-				def previousTool = Brainstorming.findByToolName("brainstorming 1")
-				//def previousTool = Clustering.findByToolName("clustering 1")
+				//def previousTool = Brainstorming.findByToolName("brainstorming 1")
+				def previousTool = Clustering.findByToolName("clustering 1")
 				
-				def data = Idea.findAllByIdInList(previousTool.ideas)
-				//def data = Cluster.findAllByIdInList(previousTool.clusters)
-				def previousToolType="Brainstorming"
+				//def data = Idea.findAllByIdInList(previousTool.ideas)
+				def data = Cluster.findAllByIdInList(previousTool.clusters)
+				def previousToolType="Clustering"
 				def ideas = [:]
 				
 				if(previousTool instanceof Clustering){
 					println("clustering")
 				}else if (previousTool instanceof Brainstorming){
-				println("brainstorming")
+					println("brainstorming")
 				}
-				/*
+				
 				
 				data.each{ n->
 					def listIdea=[]
@@ -48,7 +48,7 @@ class VotingController {
 					
 				}
 				
-				*/
+				
 				/*
 				if(previousToul instanceof Clustering){
 					previousToolType="Clustering"
@@ -85,9 +85,9 @@ class VotingController {
 		def voting = Voting.findByToolName("voting 1")
 		def votingOutput = request.getParameter("choices")
 		def jsonObj = new JsonSlurper().parseText(votingOutput)
-		println(jsonObj.size())
+		
 		jsonObj.each{
-			println("boucl")
+			
 			def choice= new Choice(data :it."data",author:it."author",rank:it."rank").save(flush : true)
 			voting.appendToChoices(choice.id.toString())
 			voting.save(flush : true)

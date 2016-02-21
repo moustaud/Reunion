@@ -105,14 +105,14 @@ div#previousToulType {
 													${data.data}
 												</td>
 												<td width=400>
-													<select id="${data.data}" style="width:120px">
+													<select id="${data.data}"  style="width:120px">
 														<g:each var="idea" in="${ideas[data.data]}">
 															<option>${idea}</option>
 														</g:each>
 													</select>
 												</td>
 												
-												<td width=width=33%><select id="${data.id}"><option>-Please vote-</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td>
+												<td width=width=33%><select id="${data.data}" class="clustering"><option>-Please vote-</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td>
 												</br>
 												</br>
 											</tr>
@@ -188,7 +188,27 @@ div#previousToulType {
   					
   					
   				}else if (previousToolType=="Clustering"){
-  					alert("ccc");
+  					$(".clustering").each(function() {
+   						var data=($(this).attr('id'));
+        				var author="dorra";
+        				var rank =$(this).val();
+        				//alert(data+" "+author+" "+rank);
+        				var choice = {
+    					"data": data,
+    					"author": author,
+    					"rank": rank
+						}
+						choices.push(choice);
+						
+						
+						
+  					});
+  					$.ajax({
+            				type: "POST",
+            				url: "/Voting/choice",
+            				data: { choices: JSON.stringify(choices),},
+            
+        				});
   				}
         	
     });  
