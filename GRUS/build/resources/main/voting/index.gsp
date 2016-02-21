@@ -105,14 +105,14 @@ div#previousToulType {
 													${data.data}
 												</td>
 												<td width=400>
-													<select id="${data.data}" class="clustering" style="width:120px">
+													<select id="${data.data}"  style="width:120px">
 														<g:each var="idea" in="${ideas[data.data]}">
 															<option>${idea}</option>
 														</g:each>
 													</select>
 												</td>
 												
-												<td width=width=33%><select id="${data.id}"><option>-Please vote-</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td>
+												<td width=width=33%><select id="${data.data}" class="clustering"><option>-Please vote-</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td>
 												</br>
 												</br>
 											</tr>
