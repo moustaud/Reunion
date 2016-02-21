@@ -4,6 +4,7 @@ import grus.Meeting
 import grus.tools.Data
 import grus.tools.Brainstorming.Brainstorming
 import grus.tools.Clustering.Clustering
+import grus.tools.Voting.Voting
 import grus.Tool
 
 class BootStrap {
@@ -99,6 +100,8 @@ class BootStrap {
 	def clustering = new Clustering(toolName : "clustering 1", toolDescription:" premier essai")
 	clustering.save(flush: true, failOnError : true)
 	
+	def voting = new Voting(toolName : "voting 1", toolDescription:" premier essai")
+	voting.save(flush: true, failOnError : true)
     }
     def destroy = {
     }

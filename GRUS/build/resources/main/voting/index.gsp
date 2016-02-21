@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clustering Tool</title>
+<title>Voting Tool</title>
 
 <style type="text/css">
 <!--
@@ -18,6 +18,11 @@ div#clusters {
 	overflow: auto;
 	position: relative;
 	left: 73px;
+}
+div#previousToulType {
+	width: 5px;
+	height: 5px;
+	visibility:hidden;
 }
 -->
 </style>
@@ -77,7 +82,7 @@ div#clusters {
 													${data.author}
 												</td>
 												
-												<td width=width=33%><select id="${data.id}"><option>-Please vote-</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td>
+												<td width=width=33%><select class="brainstorming" id="${data.data}"><option>-Please vote-</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></td>
 												</br>
 												</br>
 											</tr>
@@ -100,7 +105,7 @@ div#clusters {
 													${data.data}
 												</td>
 												<td width=400>
-													<select id="${data.id}" style="width:120px">
+													<select id="${data.data}" style="width:120px">
 														<g:each var="idea" in="${ideas[data.data]}">
 															<option>${idea}</option>
 														</g:each>
@@ -114,6 +119,8 @@ div#clusters {
 										</g:each>
 									</table>
 									</g:else>
+									<button id="validate" type="button"
+										class="btn btn-default btn-sm">Validate Voting</button>
 
 								</div>
 
@@ -147,6 +154,44 @@ div#clusters {
 	<script type="text/javascript">
 
     
+    $('#validate').click(function() {
+   
+   				
+   				var choices = [];
+   				
+   				var previousToolType="${previousToul}";
+   				//alert(previousToolType);
+   				
+   				if (previousToolType=="Brainstorming"){
+   					$(".brainstorming").each(function() {
+   						var data=($(this).attr('id'));
+        				var author="dorra";
+        				var rank =$(this).val();
+        				alert(data+" "+author+" "+rank);
+        				var choice = {
+    					"data": data,
+    					"author": author,
+    					"rank": rank
+						}
+						choices.push(choice);
+						alert(choices.length);
+						alert(JSON.stringify(choices));
+						
+						
+  					});
+  					$.ajax({
+            				type: "POST",
+            				url: "/Voting/choice",
+            				data: { choices: JSON.stringify(choices),},
+            
+        				});
+  					
+  					
+  				}else if (previousToolType=="Clustering"){
+  					alert("ccc");
+  				}
+        	
+    });  
     
       
 </script>

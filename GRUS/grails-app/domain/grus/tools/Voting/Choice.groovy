@@ -8,8 +8,8 @@ class Choice {
 	
 	String rank
 	String data
-	List<String> ideas
-	UUID idPreviousTool
+	String author
+	
     static constraints = {
     }
 	static mapping = {

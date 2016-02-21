@@ -4,6 +4,7 @@ import grus.tools.Clustering.*
 import grus.Tool
 import grus.Meeting
 import grus.tools.Data
+import groovy.json.JsonSlurper
 
 class VotingController {
 
@@ -73,5 +74,26 @@ class VotingController {
 			
 		
 				
+	}
+	
+	
+	def choice(){
+	
+		
+	
+		
+		def voting = Voting.findByToolName("voting 1")
+		def votingOutput = request.getParameter("choices")
+		def jsonObj = new JsonSlurper().parseText(votingOutput)
+		println(jsonObj.size())
+		jsonObj.each{
+			println("boucl")
+			def choice= new Choice(data :it."data",author:it."author",rank:it."rank").save(flush : true)
+			voting.appendToChoices(choice.id.toString())
+			voting.save(flush : true)
+			
+		}
+		
+
 	}
 }
