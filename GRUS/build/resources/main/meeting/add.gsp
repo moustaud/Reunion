@@ -98,7 +98,7 @@
                                                     
                                                     <select name="processModel">
                                                         <g:each in="${processList}" var="process">
-                                                            <option value="${process.id}">${process.name}</option>
+                                                            <option value="${process.id}">${process.processModelName}</option>
                                                         </g:each>
                                                     </select>
                                                     

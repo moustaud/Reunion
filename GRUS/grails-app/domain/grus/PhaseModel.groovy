@@ -1,8 +1,9 @@
 package grus
 
 class PhaseModel {
-	String name
-	Map<Integer,String> toolsName
+	String modelPhaseName
+	Map<String,String> toolsName
     static constraints = {
+    	toolsName nullable:true
     }
 }

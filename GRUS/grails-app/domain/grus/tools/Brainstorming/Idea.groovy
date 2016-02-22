@@ -4,10 +4,7 @@ class Idea implements Comparable {
 		
 	String data
 	String author
-	Date dateCreated
-	
-//	static belongsTo = Brainstorming
-		  
+	Date dateCreated		  
 	static constraints = {
 	}
 	

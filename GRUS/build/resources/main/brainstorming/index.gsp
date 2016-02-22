@@ -35,9 +35,8 @@
 						var idBrains = 'brainstorming 1';	
 						var idee = $("#chatMessage").val();
 				<%-- dans brains, on peut mettre tous les champs qu'on veut et les recuperer dans le controlleur --%>
-				if (idee != "")
-				{
-				
+				if((jQuery.trim( idee )).length!=0)
+				{				
 						var brains = {
 							"idBrains" : idBrains,
 							"idee" : idee 

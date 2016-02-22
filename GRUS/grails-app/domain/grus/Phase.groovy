@@ -1,19 +1,22 @@
 package grus
 
 class Phase {
-	
-	UUID id	
+
 	String phaseName
-	String phaseDuration
-	UUID currentToolId
-	
-	static hasMany = [ tools : Tool]
-	static belongsTo =[ process : Process]
+	UUID process
+    UUID currentTool
+	Map<String,String> tools
 	
 
     static constraints = {
-		id generator : "uuid2"
-		id index : true
-		phaseName blank:false
+    	tools nullable: true
+        currentTool nullable:true
+        process nullable:true
+        
+
+    }
+    static mapping = {
+    	phaseName index : true
+    	process index : true
     }
 }
