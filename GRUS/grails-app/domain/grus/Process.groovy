@@ -1,19 +1,12 @@
 package grus
 
 class Process {
-	UUID id	
-	String processName
-	String processDescription
-	UUID currentPhaseId
 	
-	static hasMany = [phases : Phase]
-	static belongsTo  = [facilitator : User, meeting : Meeting ]
-
-	
-
-    static constraints = {
-		id generator : "uuid2"
-		id index : true				
-		processName (blank:false, unique:true)
+	UUID modelProcess
+	UUID currentPhase 
+	Map<String,String> phases
+	static constraints = {
+		currentPhase nullable : true
+		phases nullable : true
     }
 }

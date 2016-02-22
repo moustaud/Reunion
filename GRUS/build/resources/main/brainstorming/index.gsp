@@ -22,31 +22,57 @@
                 client.connect({}, function() {
                     //Subscribe to the 'chat' topic and define a function that is executed
                     //anytime a message is published to that topic by the server or another client.
-                    client.subscribe("/topic/brainstorm", function(message) {
-                      console.log(message)
-                        var chatMsg = JSON.parse(JSON.parse(message.body))
-                        var time = '<strong>' + new Date(chatMsg.timestamp).toLocaleTimeString() + '</strong>'                        
-			$("#chatDiv").append('<strong>Moustapha said : </strong> '+ chatMsg.message + "<br/> at " + time + "<br/>");
-
-
+                    client.subscribe("/topic/brainstorm", function(message) {                      
+                        var msg = JSON.parse(JSON.parse(message.body))
+                        var time = '<strong>' + new Date(msg.timestamp).toLocaleTimeString() + '</strong>'                                   
+						$("#chatDiv").append('<strong>Moustapha said : </strong> '+ msg.message + "<br/> at " + time + "<br/>");
                     });
                 });
-                
-                
 
-                //When the user sends a chat message publish it to the chat topic
-                $("#sendButton").click(function() {
-                    client.send("/app/brainstorm", {}, JSON.stringify($("#chatMessage").val()));
+                //When the user sends a chat message publish it to the brainstorming topic
+                $("#sendButton").click(function() {	 
+                
+						var idBrains = 'brainstorming 1';	
+						var idee = $("#chatMessage").val();
+				<%-- dans brains, on peut mettre tous les champs qu'on veut et les recuperer dans le controlleur --%>
+				if((jQuery.trim( idee )).length!=0)
+				{				
+						var brains = {
+							"idBrains" : idBrains,
+							"idee" : idee 
+						}						 			
+       			
+			        	$.ajax({
+			            type: "POST",
+			            url: "/Brainstorming/saveIdeas",
+			            data: { brains: JSON.stringify(brains),},			           
+			        });                	
+                    client.send("/app/brainstorm", {},JSON.stringify(idee));  
+                   }
+                   else 
+                   {
+                   	alert('message vide !')
+                   	}                                     
                 });
+                
+                
+                
             });
+                   
+ 
+    
         </script>
     </head>
     <body>
-        <section>
-            <h2>Brainstorming</h2>                        
+        <header role="banner">
+        <h1>Brainstorming Tool</h1>
+        </header>
+        <section>                      
 		    <input type="text" id="chatMessage" value="" style="width: 500px; height: 60px;" maxlength="255" /><br/>                          
-	            <button id="sendButton">Send</button>
+	            <button type="submit" id="sendButton">Brain Storm !</button>
 	            <div id="chatDiv"></div>           	         
         </section>
+        <footer class="footer" role="contentinfo"></footer>
     </body>
 </html>
+

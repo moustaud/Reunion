@@ -1,13 +1,10 @@
 package grus.tools.Brainstorming
 
-class Idea {
+class Idea implements Comparable {
 		
 	String data
 	String author
-	Date dateCreated
-	
-//	static belongsTo = Brainstorming
-		  
+	Date dateCreated		  
 	static constraints = {
 	}
 	
@@ -15,4 +12,8 @@ class Idea {
 		
 		data index: true
 		}
+	
+	int compareTo(obj) {
+		dateCreated.compareTo(obj.dateCreated)
+	}
 }

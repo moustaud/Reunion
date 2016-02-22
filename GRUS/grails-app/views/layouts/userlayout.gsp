@@ -91,9 +91,9 @@
                 </li>
 
 
-                    <li><a href="Groups.html"><i class="fa fa-group fa-fw">
+                    <li><a href="${createLink(controller:'processModel', action:'createProcessModel')}"><i class="fa fa-refresh fa-spin">
                         <div class="icon-bg bg-blue"></div>
-                    </i><span class="menu-title">Groups</span></a></li>
+                    </i><span class="menu-title">Process Model</span></a></li>
 
                     <li><a href="Profile.html"><i class="fa fa-edit fa-fw">
                         <div class="icon-bg bg-grey"></div>
@@ -133,7 +133,7 @@
 
 
 
-	<g:pageProperty name="page.javascripts"/>
+    <g:pageProperty name="page.javascripts"/>
     <!--CORE JAVASCRIPT-->
     <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'main.js')}"></script>
      <g:pageProperty name="page.javascripts"/>
@@ -154,4 +154,4 @@
     
 </body>
 </html>
-	
+    
