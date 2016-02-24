@@ -1,62 +1,62 @@
-package grus.tools.brainstorming
-
-import grus.tools.Brainstorming.Brainstorming
+package grus.tools.Brainstorming
 import grus.tools.Brainstorming.Idea
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
-import org.apache.commons.logging.LogFactory
-import grails.converters.*
-
 class BrainstormingController {
 
-    def index() 
-	{ 
-		
-	}
+    def index() { 
+    	/*
+			The Go! button in the show meeting view send the id of the tool (here the Brainstorming) 
+			to Brainstorming controller so we can get the phase the process and the meeting ;)
+    	*/
+    	def brainstorm = Brainstorming.findById(params.id)
+        def ideas = null 
+        if(brainstorm.ideas){
+         ideas = Idea.findAllByIdInList(brainstorm.ideas)
+            
+        }
+    	[brainstorm:brainstorm,ideas:ideas]
+ 
+    }
+    
+    @MessageMapping("/addIdea")
+    @SendTo("/topic/addIdea")
+    protected String addIdea(String ideaId) {
 
-	@MessageMapping("/brainstorm")
-	@SendTo("/topic/brainstorm")
-	protected String brainstorm(String chatMsg) 
-	{
-		def builder = new JsonBuilder()
-		builder
-		{
-			message(chatMsg)
-			timestamp(new Date().getTime())
-		}
-		builder.toString()
-	}
-	
-	def saveIdeas()
-	{
-		def brainstormingOutput = request.getParameter("brains")		
-		def jsonObj = new JsonSlurper().parseText(brainstormingOutput)
-		def idea = new Idea(data : jsonObj.idee, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
-		
-		// put the idea in to the brainstorming
-		def brainstorming = Brainstorming.findByToolName(jsonObj.idBrains)
-		brainstorming.appendToIdeas(idea.id.toString())
-		brainstorming.save(flush : true)
-		render (view:'index') 
+        def idea = Idea.findById(UUID.fromString(ideaId))
+        def authorIdea = null
+        
+        
+        def builder = new JsonBuilder()
+        builder {
+            message(idea.data)
+            created(idea.created.format('dd/MM/yyyy HH:mm:ss'))
+            author(idea.author)
 
-	}
-	
-	def migrateLastIdeas ()
-	{
-		UUID idPrevious = this.previousToolId
-		while (idPrevious != null && Tool.findById(idPrevious).toolName != "BRAINSTORMING")
-		{
-			idPrevious = Tool.findById(idPrevious).previousToolId
-		}
-		if (idPrevious != null)
-		{
-			this.ideas = Tool.findById(idPrevious).ideas
-			this.save(flush : true)
-		}
-		
-	}
+        }
+        builder.toString()
+        
+    }
+    def saveIdea(){
+        if(request.method == 'POST'){
+                def ideaJson = new JsonSlurper().parseText(request.getParameter("idea"))
+                def idea = null
+                if(ideaJson.anonym == "true"){
+                    idea = new Idea(data : ideaJson.ideaText).save(flush : true)
+                }
+                else{
+                    idea = new Idea(data : ideaJson.ideaText,author : session.user.login).save(flush : true)
+                }
 
-	
+              def brainstorm = Brainstorming.findById(ideaJson.brainstormingId)
+              brainstorm.appendToIdeas(idea.id.toString()).save(flush:true)
+              render idea.id
+              
+        }
+
+            
+        
+    }
 }
