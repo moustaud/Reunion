@@ -4,8 +4,8 @@ class MeetingController {
     
     def index() { }
     def add(){
-        if(request.method == 'POST'){
-           
+    	if(request.method == 'POST'){
+    	   
             def facilitator = User.findById(params.facilitator)
             // create de process from the processModel
             // get the modelProcess
@@ -55,8 +55,8 @@ class MeetingController {
             process.save(flush:true)
             
 
-            def meeting = new Meeting(topic : params.topic,description:params.description,startDate:params.startDate,endDate:params.endDate,typeOfMeeting:params.typeOfMeeting,facilitator:facilitator.id,process:process.id)
-            
+    		def meeting = new Meeting(topic : params.topic,description:params.description,startDate:params.startDate,endDate:params.endDate,typeOfMeeting:params.typeOfMeeting,facilitator:facilitator.id,process:process.id)
+    		
            
             if(params.typeOfMeeting == "private"){
                 meeting.participants = params.participants
@@ -79,15 +79,15 @@ class MeetingController {
             render(view: '/user/userNotification')
             return
                
-        }
-        else{
-            def processList = ProcessModel.findAll()
-            def facilitators = User.findAllByRole("facilitator")
-            def users = User.findAll()
-            
-            [processList:processList,facilitators:facilitators,users:users]
-        }
-        
+    	}
+    	else{
+    		def processList = ProcessModel.findAll()
+	    	def facilitators = User.findAllByRole("facilitator")
+	    	def users = User.findAll()
+			
+	    	[processList:processList,facilitators:facilitators,users:users]
+    	}
+    	
     }
     def listAll(){
         def meetings = Meeting.findAll()
@@ -166,7 +166,18 @@ class MeetingController {
         
     }
     def show(){
+        def meeting = Meeting.findById(params.id)
+        def facilitator = User.findById(meeting.facilitator)
         
+        def nbOfMeetings = Meeting.countByFacilitator(facilitator.id)
+        def participants =null
+        if(meeting.participants){
+            participants=User.findAllByIdInList(meeting.participants)
+        }
+        def process = Process.findById(meeting.process)
+        def modelProcess = ProcessModel.findById(process.modelProcess)
+        def phases= Phase.findAllByProcess(process.id)
+        [meeting:meeting,facilitator:facilitator,nbOfMeetings:nbOfMeetings,participants:participants,modelProcess:modelProcess,phases:phases,process:process]
     }
     
 }

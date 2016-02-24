@@ -1,17 +1,18 @@
 package grus
 
-class Tool {
+class Tool implements Comparable{
 	String toolName
-	String toolDescription
 	UUID phase
-		
+	Date created = new Date()	
     static constraints = {
 		toolName nullable: false,blank:false
-		toolDescription nullable:true
-		phase nullable : true
+		
     }
     static mapping = {
 		toolName index: true
 		phase index : true
+	}
+	int compareTo(obj){
+		created.compareTo(obj.created)
 	}
 }

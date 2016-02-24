@@ -1,19 +1,16 @@
 package grus.tools.Brainstorming
 
-class Idea implements Comparable {
-		
+class Idea {
 	String data
 	String author
-	Date dateCreated		  
+	Date created = new Date()
 	static constraints = {
+		author nullable: true
 	}
-	
 	static mapping = {
+		data index : true
+		author index : true
 		
-		data index: true
-		}
-	
-	int compareTo(obj) {
-		dateCreated.compareTo(obj.dateCreated)
 	}
 }
+

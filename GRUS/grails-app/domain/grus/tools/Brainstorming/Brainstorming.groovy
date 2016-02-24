@@ -1,12 +1,8 @@
 package grus.tools.Brainstorming
-
 import grus.Tool
+class Brainstorming extends Tool{
 
-
-class Brainstorming extends Tool {
-				
-	List<String> ideas	
+	List<String> ideas
     static constraints = {
-			ideas nullable:true
     }
 }
