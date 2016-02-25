@@ -14,10 +14,24 @@
 <style type="text/css">
 <!--
 label {
-  display: inline-block;
-  width:200px;
-  text-align: left;
-}​
+	display: inline-block;
+	width: 200px;
+	text-align: left;
+}
+
+div#table {
+	width: 225px;
+	height: 300px;
+	overflow: auto;
+	position: relative;
+}
+​
+
+
+
+
+
+
 -->
 </style>
 
@@ -53,57 +67,99 @@ label {
 								</div>
 							</div>
 							<div class="form-bottom">
-							
 
-									<div class="form-group">
-										<label class="sr-only" for="grusinscription">Firm Name</label> <input
-											id="FirmName" type="text" name="FirmName" value=""
-											class="form-control" placeholder="Firm Name">
-										</br>
-										<label class="sr-only" for="grusinscription">DataBase URL</label> <input
-											id="DataBaseURL" type="text" name="DataBaseURL" value=""
-											class="form-control" placeholder="DataBase URL">
-										</br>
-										<label class="sr-only" for="grusinscription">DataBase Login</label> <input
-											id="DataBaseLogin" type="text" name="DataBaseLogin" value=""
-											class="form-control" placeholder="DataBase Login">
-										</br>
-										<label class="sr-only" for="grusinscription">DataBase Password</label> <input
-											id="DataBasePassword" type="text" name="DataBasePassword" value=""
-											class="form-control" placeholder="DataBase Password">
-										</br>
-										
-										<div>
-  											
-  											<p><strong>Dictionnary of the firm DataBase</strong></p>
-  											<p>Please enter the equivalent nomenclature of the following fields</p>
-										</div>
-										<label class="sr-only" for="grusinscription">Login</label> <input
-											id="Login" type="text" name="Login" value=""
-											class="form-control" placeholder="Login">
-										</br>
-										<label class="sr-only" for="grusinscription">Password</label> <input
-											id="Password" type="text" name="Password" value=""
-											class="form-control" placeholder="Password">
-										</br>
-										<button id="validate" type="button" >Validate</button>
-										</br>
-										</br>
+
+								<div class="form-group">
+									<label class="sr-only" for="grusinscription">Firm Name</label>
+									<input id="FirmName" type="text" name="FirmName" value=""
+										class="form-control" placeholder="Firm Name"> </br> <label
+										class="sr-only" for="grusinscription">DataBase URL</label> <input
+										id="DataBaseURL" type="text" name="DataBaseURL" value=""
+										class="form-control" placeholder="DataBase URL"> </br> <label
+										class="sr-only" for="grusinscription">DataBase Login</label> <input
+										id="DataBaseLogin" type="text" name="DataBaseLogin" value=""
+										class="form-control" placeholder="DataBase Login"> </br> <label
+										class="sr-only" for="grusinscription">DataBase
+										Password</label> <input id="DataBasePassword" type="text"
+										name="DataBasePassword" value="" class="form-control"
+										placeholder="DataBase Password"> </br>
+
+									<div>
+
+										<p>
+											<strong>Dictionnary of the firm DataBase</strong>
+										</p>
+										<p>Please enter the equivalent nomenclature of the
+											following fields</p>
+									</div>
+									<label class="sr-only" for="grusinscription">Login</label> <input
+										id="Login" type="text" name="Login" value=""
+										class="form-control" placeholder="Login"> </br> <label
+										class="sr-only" for="grusinscription">Password</label> <input
+										id="Password" type="text" name="Password" value=""
+										class="form-control" placeholder="Password"> </br>
+									<button id="validate" type="button">Validate</button>
+									</br> </br>
+									<div class="panel-body" id="table">
 										<table id="employees">
-											<tr id "employee>
-												<td width=400><b><strong>Login</strong></b></td>
-												<td width=33%><b><strong>Password</strong></b></td>
-												<td width=33%><b><button id="addEmployee" type="button" >Add Empolyee</button></b></td>
-												
-												<i class='fa fa-ok'/>
-											</tr>
-											
-											
+											<thead>
+												<th id "employee>
+												<td width=200><b><strong>Login</strong></b></td>
+
+
+												</th>
+
+											</thead>
+
+											<tbody id="listOfEmployees">
+
+												<g:each in="${employees}" var="employee">
+													<tr id="${employee.id}">
+														<td>
+															${employee.userName}
+														</td>
+														<td><input type="checkbox" name="employees"
+															value="${employee.id}"></td>
+
+
+
+													</tr>
+												</g:each>
+
+											</tbody>
 
 										</table>
-										
 									</div>
-									
+									<div class="col-md-2">
+										<button id="addBtn" class="btn btn-primary" type="button"
+											style="margin-bottom: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;
+											Add -->&nbsp;&nbsp;&nbsp;</button>
+										<button id="removeBtn" class="btn btn-warning" type="button">
+											&nbsp;&nbsp;<--Remove</button>
+									</div>
+									<div class="col-md-5">
+										<div class="panel panel-yellow">
+											<div class="panel-heading">Added Employees</div>
+											<div class="panel-body">
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>#</th>
+															<th>Username</th>
+														</tr>
+													</thead>
+													<tbody id="added">
+
+
+
+													</tbody>
+
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -132,13 +188,7 @@ label {
 	</footer>
 
 	<script type="text/javascript">
-			var employees="${employees}";
-			alert(JSON.stringify("${employees}"));
-			alert(employees.length);
-			for (var employee=0;employee<employees.length;employee++ ) {
-					alert("cc");
-  					$( "employees" ).prepend( "<tr width=400>Login</tr>" );
-			}
+			
 			
 			
 			
@@ -176,11 +226,33 @@ $('#validate').click(function() {
             data: { form: JSON.stringify(form),},
             
         });
+        
+       /*  var employees="${employees}";
+			alert(typeof employees);
+			alert(employees.length);
+			for (var employee=0;employee<employees.length;employee++ ) {
+					alert("cc");
+  					$( "added" ).prepend( "<tr width=400>Login</tr>" );
+			}*/
     	
     });  
     
+     $('#addBtn').click(function(){
+            $('#listOfEmployees > tr').each(function() {
+                var checkbox = $(this).find('td input').is(':checked');
+                if(checkbox){
+                alert("cc");
+                    var idEmployee= $(this).attr('id');
+                    var login =$(this).find('td').eq(1);
+                  alert(login.html());
+                    var userHtml ="<tr id='"+idEmployee+"'><td><input value='"+idEmployee+"' name='participants' type='checkbox' checked = 'true'/></td><td>"+login+"</td></tr>";
+                    $('#added').append(userHtml);
+                    $(this).remove();
+                }
+            });
+        });
     
-    
+   
       
 </script>
 

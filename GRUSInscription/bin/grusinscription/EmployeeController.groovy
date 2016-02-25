@@ -5,6 +5,11 @@ class EmployeeController {
 
     def index() {
 		
+		def employees= Employee.findAll();
+		println("ko")
+		println (employees.size())
+		println (employees)
+		[employees: employees]
 		
 		
 	}
@@ -14,9 +19,7 @@ class EmployeeController {
 		def jsonObj = new JsonSlurper().parseText(form)
 		
 		def firm= new Firm(firmName :jsonObj.firmName).save(flush : true)
-		def employees= Employee.findAll();
-		println (employees.size())
-		[employees: employees]
+		println("ok")
 		
 		
 	}
