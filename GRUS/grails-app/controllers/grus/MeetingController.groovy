@@ -4,8 +4,8 @@ class MeetingController {
     
     def index() { }
     def add(){
-    	if(request.method == 'POST'){
-    	   
+        if(request.method == 'POST'){
+           
             def facilitator = User.findById(params.facilitator)
             // create de process from the processModel
             // get the modelProcess
@@ -24,14 +24,26 @@ class MeetingController {
                 def phase = new Phase(phaseName:modelPhaseObject.modelPhaseName,process : process.id)
                 phase.save(flush : true)
                 def tools = [:]
+                def previousTool =  null
+
                 modelPhaseObject.toolsName.each{index,tool ->
                     def  dc = grailsApplication.getDomainClass( 'grus.tools.'+tool+'.'+tool )
-                    
-                    def toolObject = dc.clazz.newInstance(toolName : tool,phase :phase.id)
+                    def toolObject = null
+                    if(previousTool) {
+                        toolObject = dc.clazz.newInstance(toolName : tool,phase :phase.id,previousToolUUID:previousTool.id,previousToolType:previousTool.getToolName())
+                    }
+                    else{
+                        toolObject = dc.clazz.newInstance(toolName : tool,phase :phase.id)
+                    }
                     //save the created tool
                     toolObject.save(flush : true, failOnError : true)
                     //def item = [toolObject.id.toString() : tool]
-                    
+                    if(previousTool != null){
+                        previousTool.nextToolType = tool
+                        previousTool.nextToolUUID = toolObject.id
+                        previousTool.save(flush:true)
+                    }
+                    previousTool = toolObject
                     tools.put(toolObject.id.toString(),tool)
                 }
                 phase.tools=tools
@@ -55,8 +67,8 @@ class MeetingController {
             process.save(flush:true)
             
 
-    		def meeting = new Meeting(topic : params.topic,description:params.description,startDate:params.startDate,endDate:params.endDate,typeOfMeeting:params.typeOfMeeting,facilitator:facilitator.id,process:process.id)
-    		
+            def meeting = new Meeting(topic : params.topic,description:params.description,startDate:params.startDate,endDate:params.endDate,typeOfMeeting:params.typeOfMeeting,facilitator:facilitator.id,process:process.id)
+            
            
             if(params.typeOfMeeting == "private"){
                 meeting.participants = params.participants
@@ -72,6 +84,8 @@ class MeetingController {
                 facilitator.appendToMeetingsFacilitated(meeting.id.toString())
                 facilitator.save(flush:true)
             }
+            process.meeting = meeting.id
+            process.save(flush:true)
             
             flash.messageTitle ="Meeting created with success"
             flash.message = 'Your meeting ('+meeting.topic+') is created ! '
@@ -79,15 +93,15 @@ class MeetingController {
             render(view: '/user/userNotification')
             return
                
-    	}
-    	else{
-    		def processList = ProcessModel.findAll()
-	    	def facilitators = User.findAllByRole("facilitator")
-	    	def users = User.findAll()
-			
-	    	[processList:processList,facilitators:facilitators,users:users]
-    	}
-    	
+        }
+        else{
+            def processList = ProcessModel.findAll()
+            def facilitators = User.findAllByRole("facilitator")
+            def users = User.findAll()
+            
+            [processList:processList,facilitators:facilitators,users:users]
+        }
+        
     }
     def listAll(){
         def meetings = Meeting.findAll()

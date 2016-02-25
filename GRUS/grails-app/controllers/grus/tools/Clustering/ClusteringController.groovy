@@ -1,88 +1,60 @@
 package grus.tools.Clustering
-import grus.Tool
-import grus.tools.Brainstorming.*
-
+import grus.tools.Brainstorming.Brainstorming
+import grus.tools.Brainstorming.Idea
+import grus.Phase
+import grus.Process
 import grus.Meeting
-import grus.tools.Data
-
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import groovy.json.JsonBuilder
-import org.apache.commons.logging.LogFactory
-import groovy.json.JsonSlurper 
-//import static org.springframework.http.HttpStatus.*
-//import grails.transaction.Transactional
-
+import groovy.json.JsonSlurper
 
 class ClusteringController {
 
-    
+    def index() {
 
-    
+    	def cluster = Clustering.findById(params.id)
+    	def brainstorm = Brainstorming.findById(cluster.previousToolUUID)
+    	def ideas = Idea.findAllByIdInList(brainstorm.ideas)
+    	def meeting = getMeeting(cluster)
+    	def isFacilitator = false
+    	if(meeting.facilitator == session.user.id){
+    		isFacilitator = true
+    	}
+    	
+    	[cluster:cluster,brainstorm:brainstorm,ideas:ideas,isFacilitator:isFacilitator]
+     }
+     static def getMeeting(cluster){
+     	def phase = Phase.findById(cluster.phase)
+     	def process = Process.findById(phase.process)
+     	def meeting = Meeting.findById(process.meeting)
+     	return meeting
+     }
+    @MessageMapping("/addCluster")
+    @SendTo("/topic/addCluster")
+    protected String addCluster(String cluster) {
 
-	def start() {
-				/*
-				Meeting meeting = Meeting.get(params.id)
-				def currentPhase= Phase.getById(meeting.process.currentPhaseId)
-				def currentTool=Tool.getById(currentPhase.currentToolId)
-				
-				if(Tool.getById(currentTool.previousToolId)!=null){
-					def previousTool=Tool.getById(currentTool.previousToolId)
-					def data=previousTool.getByTopic(previousTool.topic)			*/		
-			//		def data= Data.findAll()
-			//		[listIdeas:data]
-			
-				def previousTool=Brainstorming.findByToolName("brainstorming 1")
-				
-				def data = Idea.findAllByIdInList(previousTool.ideas)
-				
-		//		println data.length()
-				[listIdeas:data]
-			//	}
-		
-				
-	}
-	
-	
-	
-	@MessageMapping("/createCluster")
-	@SendTo("/topic/createCluster")
-	
-	protected String createCluster(String clusterName){
-	
-		def cluster= new Cluster(data :clusterName).save(flush : true)		
+        
+        def builder = new JsonBuilder()
+        builder {
+            message(cluster)
+        }
+        builder.toString()
+        
+    }
+    @MessageMapping("/changeCluster")
+    @SendTo("/topic/changeCluster")
+    protected String changeCluster(String ideaCluster) {
 
-		saveClusters("clustering 1", cluster)
-		def builder = new JsonBuilder()
-		builder 
-		{
-			message(clusterName)
-			
-		}
-		builder.toString()
-	}
-	
-	
-	
-	
-	def selectCluster(){
-		def clustering = Clustering.findByToolName("clustering 1")
-		def clusteringOutput = request.getParameter("clusters")
-		def jsonObj = new JsonSlurper().parseText(clusteringOutput)
-		jsonObj.each{
-			def cluster=Cluster.findByData(it."clusterData")
-			cluster.appendToIdeas(it."ideaId")
-			cluster.save(flush : true)
-			
-		}
-
-	}
-	
-	
-	static def saveClusters(clusteringName, clusterid) {
-		def clustering = Clustering.findByToolName(clusteringName)
-		clustering.appendToClusters(clusterid.id.toString())
-		clustering.save(flush : true)
-	}
-	
+        def ideaText = ideaCluster.substring(0, ideaCluster.indexOf('$'))
+        def clusterText = ideaCluster.substring(ideaCluster.indexOf('$')+1)
+        
+        def builder = new JsonBuilder()
+        builder {
+            idea(ideaText)
+            cluster(clusterText)
+        }
+        builder.toString()
+        
+    }
 }

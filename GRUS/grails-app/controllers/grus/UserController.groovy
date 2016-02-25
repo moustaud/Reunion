@@ -27,6 +27,7 @@ class UserController {
 					if( user.password == passHash) {
 						def userInfoToSave = new User(firstName: user.firstName,lastName: user.lastName,login: user.login,role:user.role,picture:user.picture)
 						session.user=userInfoToSave
+						session.user.id=user.id
 						redirect(controller: "user", action: "dashboard")					
 					}
 					else{

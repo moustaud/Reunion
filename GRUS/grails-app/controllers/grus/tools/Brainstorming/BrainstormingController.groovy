@@ -4,20 +4,22 @@ import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
+import grus.Phase
 class BrainstormingController {
 
     def index() { 
-    	/*
-			The Go! button in the show meeting view send the id of the tool (here the Brainstorming) 
-			to Brainstorming controller so we can get the phase the process and the meeting ;)
-    	*/
-    	def brainstorm = Brainstorming.findById(params.id)
+        /*
+            The Go! button in the show meeting view send the id of the tool (here the Brainstorming) 
+            to Brainstorming controller so we can get the phase the process and the meeting ;)
+        */
+        def brainstorm = Brainstorming.findById(params.id)
         def ideas = null 
         if(brainstorm.ideas){
          ideas = Idea.findAllByIdInList(brainstorm.ideas)
             
         }
-    	[brainstorm:brainstorm,ideas:ideas]
+        
+        [brainstorm:brainstorm,ideas:ideas]
  
     }
     

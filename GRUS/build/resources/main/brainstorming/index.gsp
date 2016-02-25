@@ -86,7 +86,7 @@
                                            <!--start table ideas-->
                                                 <div class="col-md-8" style="padding-top:20px;">
                                                     <div class="panel panel-red">
-                                                        <div class="panel-heading">Condensed Table</div>
+                                                        <div class="panel-heading">Ideas</div>
                                                             <div class="panel-body">
                                                             <table class="table table-hover table-condensed">
                                                                 <thead>
@@ -116,6 +116,7 @@
                                                             </table>
                                                         </div>
                                                     </div>
+                                                    <a href="${createLink(controller:brainstorm.nextToolType, action:'index',id:brainstorm.nextToolUUID)}" class="btn btn-success" style="width:100%">Next Step</a>
                                                 </div><!--end table ideas--> 
                                         </div>
                                         </div>
