@@ -38,7 +38,7 @@
                                     <div class="col-lg-12">
                                         <div class="panel panel-blue">
                                             <div class="panel-heading">
-                                                Add a new Model Process</div>
+                                                Add a new Process Model</div>
                                             <div class="panel-body pan">
                                                 <g:form name="createProcessModelForm" url="[controller:'processModel',action:'createProcessModel']">
                                                 <div class="form-body pal">
