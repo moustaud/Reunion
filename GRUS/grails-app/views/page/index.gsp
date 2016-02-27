@@ -120,21 +120,21 @@
                 <div class="service-box">
                     <img src="${createLinkTo(dir:'images',file:'vote.png')}" alt="voting" />
                     <h3>Voting</h3>
-                    <p class="text-muted">Voting is a method for a group such as a meeting or an electorate to make a decision or express an opinion.</p>
+                    <p class="text-muted">Voting is a method used by a group to make a decision or express an opinion.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
                     <img src="${createLinkTo(dir:'images',file:'consensus.png')}" alt="consensus" />
                     <h3>Consensus</h3>
-                    <p class="text-muted">Consensus is the community resolution when opposing parties set aside their differences and agree on a statement that is agreeable to all, even if only barely.</p>
+                    <p class="text-muted">Consensus is the community resolution. When opposing parties set aside their differences and agree on a statement that is agreeable to all.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
                     <img src="${createLinkTo(dir:'images',file:'tools.png')}" alt="tools" />
                     <h3>Other </h3>
-                    <p class="text-muted">There is other tools at your service</p>
+                    <p class="text-muted">There are other tools at your service</p>
                 </div>
             </div>
         </div>
@@ -153,7 +153,7 @@
                                 YOU HAVE
                             </div>
                             <div class="project-name">
-                                Several meeting at the same time
+                                Several meetings at the same time
                             </div>
                         </div>
                     </div>
