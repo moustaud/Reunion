@@ -79,12 +79,12 @@
 										placeholder="DataBase Password" required="true"> 
 
 									
-									<label class="sr-only" for="grusinscription">Login</label> <input
+									<label class="sr-only" for="grusinscription">Equivalent Login</label> <input
 										id="Login" type="text" name="Login" value=""
-										class="form-control" placeholder="Login" required="true">  <label
-										class="sr-only" for="grusinscription">Password</label> <input
+										class="form-control" placeholder="Equivalent Login" required="true">  <label
+										class="sr-only" for="grusinscription">Equivalent Password</label> <input
 										id="Password" type="text" name="Password" value=""
-										class="form-control" placeholder="Password" required="true"> 
+										class="form-control" placeholder="Equivalent Password" required="true"> 
 									
 								</div>
 								 <g:actionSubmit name="signin" class="btn sign" type="submit" value="Subscribe" controller="user" action="inscription"/>
