@@ -103,10 +103,12 @@
                                                         <p class="desc">${meeting.description}</p>
                                                         <g:if test="${meeting.typeOfMeeting == 'public'}">
                                                             <span class="label label-success">Public</span>
+                                                            <span style="float:right"><a href="${createLink(controller:'meeting', action:'show',id:meeting.id)}" class="btn btn-blue">Show</a></span>
                                                             <p class="like hide">0 Participants</p>
                                                         </g:if>
                                                         <g:else>
                                                             <span class="label label-danger">Private</span>
+                                                            <span style="float:right"><a href="${createLink(controller:'meeting', action:'show',id:meeting.id)}" class="btn btn-blue">Show</a></span>
                                                             <g:if test="${meeting.participants == null}">
                                                                 <p class="like">0 Participants</p>
                                                             </g:if>
@@ -115,6 +117,7 @@
                                                                     <p class="like">${meeting.participants.size()} Participants</p>
                                                                 </g:if>
                                                             </g:else>
+
                                                         </g:else>
                                                         
                                                        

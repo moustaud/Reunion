@@ -1,48 +1,64 @@
-package grus.tools.brainstorming
-
-import grus.tools.Brainstorming.Brainstorming
+package grus.tools.Brainstorming
 import grus.tools.Brainstorming.Idea
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import groovy.json.JsonBuilder
-import org.apache.commons.logging.LogFactory
-
+import groovy.json.JsonSlurper
+import grus.Phase
 class BrainstormingController {
 
     def index() { 
+        /*
+            The Go! button in the show meeting view send the id of the tool (here the Brainstorming) 
+            to Brainstorming controller so we can get the phase the process and the meeting ;)
+        */
+        def brainstorm = Brainstorming.findById(params.id)
+        def ideas = null 
+        if(brainstorm.ideas){
+         ideas = Idea.findAllByIdInList(brainstorm.ideas)
+            
+        }
+        
+        [brainstorm:brainstorm,ideas:ideas]
+ 
+    }
+    
+    @MessageMapping("/addIdea")
+    @SendTo("/topic/addIdea")
+    protected String addIdea(String ideaId) {
 
-	}
+        def idea = Idea.findById(UUID.fromString(ideaId))
+        def authorIdea = null
+        
+        
+        def builder = new JsonBuilder()
+        builder {
+            message(idea.data)
+            created(idea.created.format('dd/MM/yyyy HH:mm:ss'))
+            author(idea.author)
 
-	@MessageMapping("/brainstorm")
-	@SendTo("/topic/brainstorm")
-	protected String brainstorm(String chatMsg) 
-	{	
-			
-		
-		def idea = new Idea(data : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
-		saveIdeas("brainstorming 1", idea)
-		//saveIdeas(idea)
-		def builder = new JsonBuilder()
-		builder 
-		{
-			message(chatMsg)
-			timestamp(new Date().getTime())
-		}
-		builder.toString()
+        }
+        builder.toString()
+        
+    }
+    def saveIdea(){
+        if(request.method == 'POST'){
+                def ideaJson = new JsonSlurper().parseText(request.getParameter("idea"))
+                def idea = null
+                if(ideaJson.anonym == "true"){
+                    idea = new Idea(data : ideaJson.ideaText).save(flush : true)
+                }
+                else{
+                    idea = new Idea(data : ideaJson.ideaText,author : session.user.login).save(flush : true)
+                }
 
+              def brainstorm = Brainstorming.findById(ideaJson.brainstormingId)
+              brainstorm.appendToIdeas(idea.id.toString()).save(flush:true)
+              render idea.id
+              
+        }
 
-		
-	}
-	
-	
-	static def saveIdeas(brainstormingName, idd) {
-		def brainstorming = Brainstorming.findByToolName(brainstormingName)
-		//def brainstorming = Brainstorming.findById(this.id)
-	//	def idea = new Idea(comment : chatMsg, author : "Moustapha", dateCreated : new Date().getTime()).save(flush : true)
-	//	println idd.id.toString()
-		brainstorming.appendToIdeas(idd.id.toString())
-		brainstorming.save(flush : true)		
-	}
-	
-	
+            
+        
+    }
 }

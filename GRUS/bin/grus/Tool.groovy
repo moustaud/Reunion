@@ -1,27 +1,25 @@
 package grus
-import grus.tools.Data
 
-
-class Tool {
-		
-//	UUID id
+class Tool implements Comparable{
 	String toolName
-	String toolDescription
-	//for decoration
-	String icon = "fa-star"
-	String label ="label-red"
-	
-//	UUID previousToolId
-//	Data data	
-	
-
-   static constraints = {
-		toolName nullable: false,blank:false, unique : true
+	UUID phase
+	Date created = new Date()
+	String nextToolType
+	UUID nextToolUUID	
+	String previousToolType
+	UUID previousToolUUID
+    static constraints = {
+		toolName nullable: false,blank:false
+		nextToolUUID nullable:true
+		nextToolType nullable:true
+		previousToolUUID nullable:true
+		previousToolType nullable:true
     }
-	
-	
-	static mapping = {
+    static mapping = {
 		toolName index: true
+		phase index : true
 	}
-
+	int compareTo(obj){
+		created.compareTo(obj.created)
+	}
 }

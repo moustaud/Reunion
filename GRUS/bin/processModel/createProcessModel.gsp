@@ -38,7 +38,7 @@
                                     <div class="col-lg-12">
                                         <div class="panel panel-blue">
                                             <div class="panel-heading">
-                                                Add a new Model Process</div>
+                                                Add a new Process Model</div>
                                             <div class="panel-body pan">
                                                 <g:form name="createProcessModelForm" url="[controller:'processModel',action:'createProcessModel']">
                                                 <div class="form-body pal">
@@ -54,7 +54,7 @@
                                                         
                                                     </div>
                                                     <div class="form-group">
-                                                        <g:textArea name="processModelDescription" rows="5" placeholder="Description" class="form-control" />
+                                                        <g:textArea id ="processModelDescription" name="processModelDescription" rows="5" placeholder="Description" class="form-control" />
                                                     </div>
                                                     
                                                     <hr /> 
@@ -93,7 +93,7 @@
                                                     
                                                 </div>
                                                 <div class="form-actions text-right pal">
-                                                    <button type="submit" class="btn btn-primary">
+                                                    <button type="button" onclick="createJSON()" class="btn btn-primary">
                                                         Continue</button>
                                                 </div>
                                                 </g:form>
@@ -122,11 +122,11 @@
         <ul class="dropdown-menu pull-right">
             <g:each var="tool" in="${tools}">
                 <li>
-                    <a href="#" value="${tool.toolName}" class="addTool">
+                    <a href="#" value="${tool.toolModelName}" class="addTool">
                         <span class="label ${tool.label}">
                             <i class="fa ${tool.icon}"></i>
                         </span>&nbsp;
-                        ${tool.toolName}
+                        ${tool.toolModelName}
                     </a>
                 </li>
                 <li class="divider"></li>
@@ -158,12 +158,11 @@
             $(document).ready(function(){
                 var toonNumber=0;
                 var currentPhase=0;
-                var phase=null;
                 var phaseSelectedList = null;
                 var toolsSelected = null;
                 $('#addPhase').click(function(){
                     var phaseModelName = $('#phaseModelName').val();
-                    var phase = "<li data-id='"+(++currentPhase)+"' class='dd-item dd3-item'><a href='#?w=500' rel='popup_name' class='poplight dd-handle dd3-handle'></a><div class='dd3-content'>"+ phaseModelName +"</div><input type='hidden' name='phases[\""+phaseModelName+"\"]' value='"+phaseModelName+"'/><ol class='dd-list'></ol></li>";
+                    var phase = "<li name='"+phaseModelName+"' data-id='"+(++currentPhase)+"' class='dd-item dd3-item'><a href='#?w=500' rel='popup_name' class='poplight dd-handle dd3-handle'></a><div class='dd3-content'>"+ phaseModelName +"</div><ol id='"+phaseModelName+"' class='dd-list'></ol></li>";
                     var phases = $('#phasesList').append(phase);
                     
                 });
@@ -197,9 +196,6 @@
                     //Apparition du fond - .css({'filter' : 'alpha(opacity=80)'}) pour corriger les bogues de IE
                     $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
                     phaseSelectedList = $(this).parent().find('ol');
-                    phase = $(this).parent().find('input:hidden');
-                    
-                    //toolsSelected = $(this).parent().find('select');
                     return false;
                 });
                 
@@ -214,18 +210,61 @@
 
                 $('.addTool').live('click',function(){
                     
-                    var newTool = "<li data-id='16' class='dd-item dd3-item'><div class='dd3-content'>"+$(this).attr('value')+"</div></li> ";
-                    //toolsSelected.append('<option value="'+$(this).attr('value')+'" selected>'+$(this).attr('value')+'</option>');
-                    var tool ="<input type='hidden' name='phases[\'"+phase.attr('value')+"\'][\""+(++toonNumber)+"\"]' value='"+$(this).attr('value')+"'/>";
+                    var newTool = "<li data='"+$(this).attr('value')+"' data-id='16' class='dd-item dd3-item'><div class='dd3-content'>"+$(this).attr('value')+"</div></li> ";
                     phaseSelectedList.append(newTool);
-                    phaseSelectedList.append(tool);
                     $('#fade , .popup_block').fadeOut(function() {
-                        $('#fade, a.close').remove();  //...ils disparaissent ensemble
+                        $('#fade, a.close').remove();  
                     });
                     return false;
                 });
 
+
             });
+            
+            function createJSON() {
+                
+                    jsonObj = [];
+                    processModelName = $('#processModelName').val();
+                    processModelDescription = $('#processModelDescription').val() ;
+
+                    $('#phasesList > li').each(function(){
+
+
+                        
+                        item = {};
+                        item['phaseName'] = $(this).attr('name');
+                        item['tools']= [];
+                        $(this).find('ol > li').each(function(){
+                            item['tools'].push($(this).attr('data'));
+                        });
+                        jsonObj.push(item);
+                    });
+                    
+
+                    console.log(jsonObj);
+                    var objectDataString = JSON.stringify(jsonObj);
+
+                    $.ajax({
+                                type: "POST",
+                                url: "${createLink(controller:'ProcessModel',action:'createProcessModel')}",
+                                dataType: "json",
+                                data: {
+                                     phases: objectDataString,
+                                     modelName : processModelName,
+                                     modelDescription : processModelDescription
+                                },
+                                success: function (data) {
+                                   //alert('Success');
+                                $(location).attr('href', "${createLink(controller:'ProcessModel',action:'saveSuccess')}");
+
+                                },
+                                error: function () {
+                                 //alert('Error');
+                                $(location).attr('href', "${createLink(controller:'ProcessModel',action:'saveSuccess')}");
+
+                                }
+                            });
+                }
             
     </script>
     <script type="text/javascript" src="${createLinkTo(dir:'javascripts',file:'ui-nestable-list.js')}"></script>

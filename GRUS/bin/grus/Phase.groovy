@@ -1,19 +1,25 @@
 package grus
 
-class Phase {
-	
-	UUID id	
-	String phaseName
-	String phaseDuration
-	UUID currentToolId
-	
-	static hasMany = [ tools : Tool]
-	static belongsTo =[ process : Process]
-	
+class Phase implements Comparable{
+
+    String phaseName
+    UUID process
+    UUID currentTool
+    Map<String,String> tools
+    Date created = new Date()
 
     static constraints = {
-		id generator : "uuid2"
-		id index : true
-		phaseName blank:false
+        tools nullable: true
+        currentTool nullable:true
+        process nullable:true
+        
+
+    }
+    static mapping = {
+        phaseName index : true
+        process index : true
+    }
+    int compareTo(obj){
+        created.compareTo(obj.created)
     }
 }

@@ -65,6 +65,10 @@
                     <g:link class="page-scroll" controller="user" action="connect"> Connect </g:link>
 
                 </li>
+                 <li>
+                    <g:link class="page-scroll" controller="user" action="companyInscription"> Company Inscription </g:link>
+
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

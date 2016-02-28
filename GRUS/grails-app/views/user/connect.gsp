@@ -67,6 +67,10 @@
                                     <label class="sr-only" for="password">Password</label>
                                     <g:passwordField id="password" name="password" class="form-control" placeholder="Password" required="true" />
                                 </div>
+                                 <div class="form-group">
+                                    <label class="sr-only" for="company">Company</label>
+                                    <g:textField id="company" name="company" class="form-control" placeholder="Company"  />
+                                </div>
                                 <g:actionSubmit name="signin" class="btn sign" type="submit" value="Sign in" controller="user" action="login"/>
                             </g:form>
                         </div>

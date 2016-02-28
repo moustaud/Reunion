@@ -1,25 +1,47 @@
 package grus
+import groovy.json.JsonSlurper
 
 class UserController {
 
-    def index() {
-	
+	def index() {
 	}
 
-    def connect(){
-        // this function it's for apply the view with de two forms :
-        // one for login
-        // and one for create new account
+	def connect(){
+		// this function it's for apply the view with de two forms :
+		// one for login
+		// and one for create new account
 
-    }
-    def logout(){
-    	session.user = null;
-    	redirect(controller: "page", action: "index")
 	}
-    def login(){
+
+	def companyInscription(){
+	}
+
+	def inscription(){
+		Company newCompany= new Company(companyName :params.CompanyName,url: params.DataBaseURL, dataBaseLogin: params.DataBaseLogin,dataBasePassword: params.DataBasePassword, loginEq: params.Login, passwordEq:params.Password)
+		newCompany.save(flush: true,failOnError: true)
+		println(newCompany)
+		render(view: "companyInscription",params:params)
+	}
+	def logout(){
+		session.user = null;
+		redirect(controller: "page", action: "index")
+	}
+	def login(){
+
 
 		if (params.login && params.password) {
-				session.user == null;
+			session.user == null;
+			println(params.company)
+			if(params.company){
+				def company = Company.findByCompanyName(params.company)
+				if(company){
+					println("ok")
+				}else{
+				println("company does not exist")
+				redirect(action:"loginForm", params:[message:"Error authentication, Failed to cfind the company!", messageType:"alert-warning"])
+				}
+				
+			}else{
 				def user = User.findByLogin(params.login)
 				if (user){
 					def userSalt = user.salt
@@ -28,24 +50,24 @@ class UserController {
 						def userInfoToSave = new User(firstName: user.firstName,lastName: user.lastName,login: user.login,role:user.role,picture:user.picture)
 						session.user=userInfoToSave
 						session.user.id=user.id
-						redirect(controller: "user", action: "dashboard")					
+						redirect(controller: "user", action: "dashboard")
 					}
 					else{
-						redirect(controller: "user", action: "newAccountForm", params:[message:"Wrong password!", messageType:"alert-danger"])					
+						redirect(controller: "user", action: "newAccountForm", params:[message:"Wrong password!", messageType:"alert-danger"])
 					}
 				}
 				else {
-	                redirect(action:"loginForm", params:[message:"Error authentication, Failed to connect with these IDs!", messageType:"alert-warning"])
+					redirect(action:"loginForm", params:[message:"Error authentication, Failed to connect with these IDs!", messageType:"alert-warning"])
 				}
+			}
 		}
 		else{
 			redirect(action:"loginForm", params:[message:"could not find request params!", messageType:"alert-danger"])
 		}
-	
-    }
+	}
 
 
-    def newAccount(){
+	def newAccount(){
 		if(params.login && params.email && params.password && params.firstName && params.lastName && params.passwordConfirmation){
 			if(params.password == params.passwordConfirmation){
 				try{
@@ -65,67 +87,64 @@ class UserController {
 			else{
 				redirect(action:"newAccountForm", params:[message:"Error, You must tape the same password! ", messageType:"alert-warning"])
 			}
-			
 		}
 		else{
 			redirect(action:"newAccountForm", params:[message:"Error, Failed to create new user account! Please enter all fields", messageType:"alert-warning"])
 		}
 	}
-		
-    
 
-    def loginForm(){
-        render(view: "login",params:params)
-    }
-    def newAccountForm(){
-        render(view: "newAccount",prams:params)
-    }
-    def dashboard(){
-    
-    }
-    def profile(){
-    	def user = User.findByLogin(session.user.login)
-    	user.salt=null
-    	[user:user]
-    }
-    def changeProfile(){
-    	try{
-    		def user = User.findByLogin(session.user.login)
-	    	user.setFirstName(params.firstName)
-	    	user.setLastName(params.lastName)
-	    	user.setGender(params.gender)
-	    	user.setCompany(params.company)
-	    	user.setJob(params.job)
-	    	
-	    	user.save(failOnError: true,flush: true)
-    		render(view: "profile",model:[user:user])
-    	}
-    	catch(e){
-    		redirect(action:"changeProfileForm", params:[message:"Error, Failed to update new user account! "+e, messageType:"alert-warning"])
-    	}
-    }
-    def chnageProfileForm(){
-        render(view: "changeProfile",prams:params)
-    }
-    def uploadImage() {
-	    def f = request.getFile('picture')
-	    if (f.empty) {
-	    	flash.messageTitle ="Error ! in uploading image"
-	        flash.message = 'file cannot be empty'
-	        flash.messageType= "note-danger"
-	        render(view: 'userNotification')
-	        return
-	    }
-	    def picture =grailsApplication.config.pathForGrailsApp+assetPath(src: "images/users/"+session.user.login+".jpg")
-	    f.transferTo(new File(picture))
-	    def user = User.findByLogin(session.user.login)
-	    user.setPicture("users/"+user.login+".jpg")
-	    user.save(failOnError: true,flush: true)
-	    session.user.picture = "users/"+user.login+".jpg"
-	    redirect(action:"profile", user:user)
+
+
+	def loginForm(){
+		render(view: "login",params:params)
+	}
+	def newAccountForm(){
+		render(view: "newAccount",prams:params)
+	}
+	def dashboard(){
+	}
+	def profile(){
+		def user = User.findByLogin(session.user.login)
+		user.salt=null
+		[user:user]
+	}
+	def changeProfile(){
+		try{
+			def user = User.findByLogin(session.user.login)
+			user.setFirstName(params.firstName)
+			user.setLastName(params.lastName)
+			user.setGender(params.gender)
+			user.setCompany(params.company)
+			user.setJob(params.job)
+
+			user.save(failOnError: true,flush: true)
+			render(view: "profile",model:[user:user])
+		}
+		catch(e){
+			redirect(action:"changeProfileForm", params:[message:"Error, Failed to update new user account! "+e, messageType:"alert-warning"])
+		}
+	}
+	def chnageProfileForm(){
+		render(view: "changeProfile",prams:params)
+	}
+	def uploadImage() {
+		def f = request.getFile('picture')
+		if (f.empty) {
+			flash.messageTitle ="Error ! in uploading image"
+			flash.message = 'file cannot be empty'
+			flash.messageType= "note-danger"
+			render(view: 'userNotification')
+			return
+		}
+		def picture =grailsApplication.config.pathForGrailsApp+assetPath(src: "images/users/"+session.user.login+".jpg")
+		f.transferTo(new File(picture))
+		def user = User.findByLogin(session.user.login)
+		user.setPicture("users/"+user.login+".jpg")
+		user.save(failOnError: true,flush: true)
+		session.user.picture = "users/"+user.login+".jpg"
+		redirect(action:"profile", user:user)
 	}
 	static def userNotification(){
-		
 	}
 	def isFacilitator(){
 		if(session.user.role == "facilitator"){
@@ -143,8 +162,4 @@ class UserController {
 			return false
 		}
 	}
-	
-	
-	
-	
 }

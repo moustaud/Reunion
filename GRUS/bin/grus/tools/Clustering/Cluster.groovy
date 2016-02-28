@@ -1,8 +1,5 @@
 package grus.tools.Clustering
 
-import java.util.Date
-import java.util.List;;
-
 class Cluster {
 
 	String data

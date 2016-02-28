@@ -7,7 +7,7 @@ class Meeting {
 	Date created = new Date()
 	Date startDate
 	Date endDate
-	
+	UUID process
 	UUID facilitator
 	List<String> participants
 	//UUID createdBy
@@ -22,8 +22,6 @@ class Meeting {
 		if you chose start now from the view the startDate take the current date
 	*/ 
 	String typeOfMeeting = "private"// can take two of value : private or public
-	//static hasMany = [participants : User]
-	//static hasOne = [facilitator :User]
 	
 
 	
@@ -33,6 +31,7 @@ class Meeting {
 		startDate nullable:true
 		endDate nullable:true
 		typeOfMeeting inList : ["private","public"], nullable: false
+		process nullable : true
     }
     static mapping = {
 		typeOfMeeting index : true
