@@ -1,0 +1,35 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EmployeeServiceService WSDL service -->
+
+  <service name="EmployeeService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://DefaultNamespace"/>
+      <parameter name="wsdlServiceElement" value="EmployeeServiceService"/>
+      <parameter name="schemaQualified" value="http://DefaultNamespace"/>
+      <parameter name="wsdlServicePort" value="EmployeeService"/>
+      <parameter name="className" value="DefaultNamespace.EmployeeServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="EmployeeService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="verifyEmployee" qname="operNS:verifyEmployee" xmlns:operNS="http://DefaultNamespace" returnQName="retNS:verifyEmployeeReturn" xmlns:retNS="http://DefaultNamespace" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:url" xmlns:pns="http://DefaultNamespace" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:db_login" xmlns:pns="http://DefaultNamespace" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:db_mdp" xmlns:pns="http://DefaultNamespace" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:equivalent_userName" xmlns:pns="http://DefaultNamespace" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:equivalent_mdp" xmlns:pns="http://DefaultNamespace" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:userName" xmlns:pns="http://DefaultNamespace" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:mdp" xmlns:pns="http://DefaultNamespace" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="verifyEmployee"/>
+
+  </service>
+</deployment>
