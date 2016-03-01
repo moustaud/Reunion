@@ -17,11 +17,8 @@ public class EmployeeService {
     	
      	
     	try{
-    		System.out.println("avant22");
     		Class.forName("com.mysql.jdbc.Driver");
-    		System.out.println("avant3");
     		cn = DriverManager.getConnection(url,db_login,db_mdp);
-    		System.out.println("apres");
     		st = cn.createStatement();
     		String sql = "SELECT * FROM Employee WHERE Employee."+equivalent_userName+"="+userName;
     		rs = st.executeQuery(sql);
